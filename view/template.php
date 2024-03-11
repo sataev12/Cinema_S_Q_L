@@ -37,7 +37,7 @@
         <div class='menu-button'></div>
     </label>
         <ul class="menu">
-        <li>One</li>
+        <li><a href="index.php?action=listFilms">Films</a></li>
         <li>Two</li>
         <li>Three</li>
         <li>Four</li>

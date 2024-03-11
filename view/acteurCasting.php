@@ -19,7 +19,7 @@
                     <p>Acteur a joué dans les films suivants :</p>
                     <?php
                         foreach($filmRoleActeur->fetchAll() as $Id => $castingAct) { ?>
-                            <p><?= $castingAct['filmAct'] ?> dans un role <?= $castingAct['roleAct'] ?></p>
+                            <p><?= $castingAct['filmAct'] ?> dans une rôle <?= $castingAct['roleAct'] ?></p>
                     <?php    } ?>
                             
 

@@ -235,7 +235,7 @@ class CinemaController {
     public function detailsFilm($id) {
             $pdo = Connect::seConnecter();
             $requete = $pdo->prepare("
-                SELECT Titre, AnneSortFr, Duree, Synopsis, Note, Affiche, Personne.Nom, Personne.Prenom, URLimg
+                SELECT Titre, AnneSortFr, Duree, Synopsis, Note, Affiche, Personne.Nom, Personne.Prenom, URLimg, Film.Id_Realisateur
                 FROM `Film`
                 INNER JOIN Realisateur ON Film.Id_Film = Realisateur.Id_Realisateur
                 INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
@@ -254,6 +254,16 @@ class CinemaController {
                 WHERE Film.Id_Film = :id;
             ");
             $requeteActeur->execute([
+                ':id' => $id
+            ]);
+            $requeteGenre = $pdo->prepare("
+            SELECT Genre.Libelle AS genreFilm, Film.Titre 
+            FROM `genre_film`
+            INNER JOIN Genre ON genre_film.Id_Genre = Genre.Id_Genre
+            INNER JOIN Film ON genre_film.Id_Film = Film.Id_Film
+            WHERE genre_film.Id_Film = :id;
+            ");
+            $requeteGenre->execute([
                 ':id' => $id
             ]);
             require "view/detailsFilm.php";
@@ -281,9 +291,34 @@ class CinemaController {
         $filmRoleActeur->execute([
             ':id' => $id
         ]);
-
         require "view/acteurCasting.php";
     }
+
+    public function realisateurCasting($id) {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+        SELECT Film.Titre AS FilmRealstr, CONCAT(Personne.Nom, ' ', Personne.Prenom) AS initRealstr, Personne.Sexe AS sexe, Personne.DateNaissance AS dtNaissance
+        FROM `Realisateur`
+        INNER JOIN Film ON Realisateur.Id_Realisateur = Film.Id_Realisateur
+        INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
+        WHERE Realisateur.Id_Realisateur = :id;
+        ");
+        $requete->execute([
+            ':id' => $id
+        ]);
+
+        $tousFilmRealstr = $pdo->prepare("
+        SELECT Film.Titre AS filmRealistr
+        FROM `Realisateur` 
+        INNER JOIN Film ON Realisateur.Id_Realisateur = Film.Id_Realisateur
+        WHERE Realisateur.Id_Realisateur = :id
+        ");
+        $tousFilmRealstr->execute([
+            ':id' => $id
+        ]);
+        require "view/realisateurCasting.php";
+    }
+
 
     public function acceuil() {
         $pdo = Connect::seConnecter();

@@ -16,8 +16,13 @@
                     <img src="<?= $film["URLimg"] ?>" alt="Photo de film">
                     <div class="detailColonne">
                         <p>Anné de sortie : <?= $film["AnneSortFr"] ?></p>
+                        <p>Les genre du film:</p>
+                        <?php
+                            foreach($requeteGenre->fetchAll() as $Id => $genre) { ?>
+                                <p><?= $genre["genreFilm"] ?></p>
+                        <?php } ?>
                         <p>Avis <?= $film["Note"] ?>/5</p>
-                        <p>Realisateur : <a href=""> <?= $film["Nom"] . " " . $film["Prenom"] ?> </a></p>
+                        <p>Realisateur : <a href="index.php?action=realisateurCasting&id=<?= $film['Id_Realisateur'] ?>"> <?= $film["Nom"] . " " . $film["Prenom"] ?> </a></p>
                         <p>Acteur :</p>
                         <?php
                             
