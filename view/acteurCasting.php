@@ -1,7 +1,8 @@
 <?php 
     ob_start(); 
-    $film = $requete->fetch();
+    $acteurFilm = $requete->fetch();
     // $acteur = $requeteActeur->fetchAll();
+    // var_dump($acteurFilm); die;
 ?>
 
 <table class="uk-table uk-table-striped">
@@ -11,21 +12,18 @@
     <tbody>
         <?php
         ?>    
-            <div class="Film-detail">
-                    <h1><?= $film["Titre"] ?></h1>
-                    <img src="<?= $film["URLimg"] ?>" alt="Photo de film">
-                    <div class="detailColonne">
-                        <p>Anné de sortie : <?= $film["AnneSortFr"] ?></p>
-                        <p>Avis <?= $film["Note"] ?>/5</p>
-                        <p>Realisateur : <a href=""> <?= $film["Nom"] . " " . $film["Prenom"] ?> </a></p>
-                        <p>Acteur :</p>
-                        <?php
-                            foreach($requeteActeur->fetchAll() as $Id => $acteur) { ?>
-                                <p><?= $acteur["act"] ?> dans le rôle de <?= $acteur["nomPersonnage"] ?></p>
-                            <?php }
-                        ?>
-                        
-                    </div>
+            <div class="Acteur-detail">
+                    <h1><?= $acteurFilm["intiAct"] ?></h1>
+                    <p>Sexe : <?= $acteurFilm["sexe"] ?></p>
+                    <p>La date de naissance : <?= $acteurFilm["dtNaissance"] ?></p>
+                    <p>Acteur a joué dans les films suivants :</p>
+                    <?php
+                        foreach($filmRoleActeur->fetchAll() as $Id => $castingAct) { ?>
+                            <p><?= $castingAct['filmAct'] ?> dans un role <?= $castingAct['roleAct'] ?></p>
+                    <?php    } ?>
+                            
+
+    
             </div>
                     
        

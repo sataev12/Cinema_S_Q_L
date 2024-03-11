@@ -20,8 +20,14 @@
                         <p>Realisateur : <a href=""> <?= $film["Nom"] . " " . $film["Prenom"] ?> </a></p>
                         <p>Acteur :</p>
                         <?php
+                            
                             foreach($requeteActeur->fetchAll() as $Id => $acteur) { ?>
+                                
                                 <p><?= $acteur["act"] ?> dans le rôle de <?= $acteur["nomPersonnage"] ?></p>
+                                
+                                
+                                <a href='index.php?action=acteurCasting&id=<?= $acteur['Id_Acteur'] ?>'>Details d'un acteur</a>
+                                
                             <?php }
                         ?>
                         

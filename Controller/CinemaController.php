@@ -245,7 +245,7 @@ class CinemaController {
                 ':id' => $id
             ]);
             $requeteActeur = $pdo->prepare("
-                SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS act, nomPersonnage
+                SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS act, nomPersonnage, Acteurs.Id_Acteur
                 FROM jouer
                 INNER JOIN Role ON jouer.id_role = Role.id_role
                 INNER JOIN Acteurs ON jouer.Id_Acteur = Acteurs.Id_Acteur
@@ -262,8 +262,27 @@ class CinemaController {
     public function acteurCasting($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-        
-        ")
+        SELECT CONCAT (Personne.Nom, ' ', Personne.Prenom) AS intiAct, Personne.Sexe AS sexe, Personne.DateNaissance AS dtNaissance
+        FROM `Acteurs` 
+        INNER JOIN Personne ON Acteurs.id_personne = Personne.id_personne
+        WHERE Acteurs.Id_Acteur = :id;
+        ");
+        $requete->execute([
+            'id' => $id
+        ]);
+        $filmRoleActeur = $pdo->prepare("
+        SELECT Film.Titre AS filmAct, Role.NomPersonnage AS roleAct, Acteurs.Id_Acteur 
+        FROM `jouer` 
+        INNER JOIN Film ON jouer.Id_Film = Film.Id_Film
+        INNER JOIN Role ON jouer.id_role = Role.id_role
+        INNER JOIN Acteurs ON jouer.Id_Acteur = Acteurs.Id_Acteur
+        WHERE Acteurs.Id_Acteur = :id
+        ");
+        $filmRoleActeur->execute([
+            ':id' => $id
+        ]);
+
+        require "view/acteurCasting.php";
     }
 
     public function acceuil() {
