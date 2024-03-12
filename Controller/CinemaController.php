@@ -319,6 +319,27 @@ class CinemaController {
         require "view/realisateurCasting.php";
     }
 
+    public function castingGenre($id) {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+        SELECT Libelle AS libelle, Id_Genre AS idGenre
+        FROM Genre
+        ");
+        $requete->execute();
+        $detailGenre = $pdo->prepare("
+        SELECT Genre.Libelle AS libelle, Film.Titre AS film, genre_film.Id_Genre AS idGenre
+        FROM `genre_film` 
+        INNER JOIN Genre ON genre_film.Id_Genre = Genre.Id_Genre
+        INNER JOIN Film ON genre_film.Id_Film = Film.Id_Film
+        WHERE genre_film.Id_Genre = :id
+        ");
+        $detailGenre->execute([
+            ':id' => $id
+        ]);
+
+        require "view/castingGenre.php";
+    }
+
 
     public function acceuil() {
         $pdo = Connect::seConnecter();

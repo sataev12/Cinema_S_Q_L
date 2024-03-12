@@ -15,7 +15,7 @@
 <body>
 
     <section class="top-nav">
-        <a href="page.php?action=acceuil">  
+        <a href="index.php?action=acceuil">  
             <div class="logo">
                 <!-- code SVG ici -->
                 <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,10 +38,10 @@
     </label>
         <ul class="menu">
         <li><a href="index.php?action=listFilms">Films</a></li>
-        <li>Two</li>
-        <li>Three</li>
-        <li>Four</li>
-        <li>Five</li>
+        <li><a href="index.php?action=listActeurs">Acteurs</a></li>
+        <li><a href="index.php?action=new">Nouveau</a></li>
+        <li><a href="index.php?action=listRealisateur">Realisateur</a></li>
+        <li><a href="index.php?action=castingGenre">Genre</a></li>
         </ul>
     </section>
 
