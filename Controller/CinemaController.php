@@ -349,6 +349,47 @@ class CinemaController {
         require "view/detailGenre.php";
     }
 
+    public function listeRole(){
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+        SELECT NomPersonnage, id_role
+        FROM `Role`
+        ");
+        $requete->execute();
+
+        require "view/listeRole.php";
+    }
+
+    public function detailRole($id) {
+        $pdo = Connect::seConnecter();
+
+        $requeteRole = $pdo->prepare("
+        SELECT *
+        FROM Role
+        WHERE id_role = :id
+        ");
+        $requeteRole->execute([
+            ':id' => $id
+        ]);
+
+
+
+        $requeteActeur = $pdo->prepare("
+        SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS NomActeur, Film.Titre AS dansFilm   
+        FROM `jouer`
+        INNER JOIN Film ON jouer.Id_Film = Film.Id_Film
+        INNER JOIN Role ON jouer.id_role = Role.id_role
+        INNER JOIN Acteurs ON jouer.Id_Acteur = Acteurs.Id_Acteur
+        INNER JOIN Personne ON Acteurs.id_personne = Personne.id_personne
+        WHERE Role.id_role = :id;
+        ");
+        $requeteActeur->execute([
+            ':id' => $id
+        ]);
+
+        require "view/detailRole.php";
+    }
+
 
     public function acceuil() {
         $pdo = Connect::seConnecter();
