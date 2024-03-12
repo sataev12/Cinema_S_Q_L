@@ -27,22 +27,64 @@ class CinemaController {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
         SELECT *
-        FROM Acteurs INNER JOIN personne ON Acteurs.id_personne = personne.id_personne
+        FROM Acteurs 
+        INNER JOIN personne ON Acteurs.id_personne = personne.id_personne
         ");
         $requete->execute();
         require "view/listActeurs.php";
     }
 
+    public function acteurFilmographie($id) {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+        SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS NomActeur, Personne.Sexe AS sexe, Personne.DateNaissance AS DateNaissance, Acteurs.Id_Acteur 
+        FROM `Acteurs` 
+        INNER JOIN Personne ON Acteurs.id_personne = Personne.id_personne
+        WHERE Acteurs.Id_Acteur = :id;
+        ");
+        $requete->execute([
+            ':id' => $id
+        ]);
+        $requeteFilmographie = $pdo->prepare("
+        SELECT Film.Titre AS titre
+        FROM jouer
+        INNER JOIN Acteurs ON jouer.Id_Acteur = Acteurs.Id_Acteur
+        INNER JOIN Personne ON Acteurs.id_personne = Personne.id_personne
+        INNER JOIN Film ON jouer.Id_Film = Film.Id_Film
+        WHERE Acteurs.Id_Acteur = :id;
+        ");
+        $requeteFilmographie->execute([
+            ':id' => $id
+        ]);
+
+        require "view/acteurFilmographie.php";
+    }
+
     public function listRealisateur() {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-        SELECT Personne.Nom, Personne.Prenom, Film.Titre, Film.AnneSortFr
+        SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS NomRealisateur, Realisateur.Id_Realisateur AS Id_Realisateur
         FROM Realisateur
         INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
-        INNER JOIN Film ON Realisateur.Id_Realisateur = Film.Id_Realisateur
         ");
         $requete->execute();
         require "view/listRealisateur.php";
+    }
+
+    public function realisateurInfo($id) {
+        $pdo = Connect::seConnecter();
+        $requeteInfoRealisateur = $pdo->prepare("
+        SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS NomReal, Personne.Sexe AS sexe, Personne.DateNaissance AS dateNaissance, Film.Titre AS filmographie
+        FROM Realisateur
+        INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
+        INNER JOIN Film ON Realisateur.Id_Realisateur = Film.Id_Realisateur
+        WHERE Realisateur.Id_Realisateur = :id;
+        ");
+        $requeteInfoRealisateur->execute([
+            ':id' => $id
+        ]);
+
+        require "view/realisateurInfo.php";
     }
 
     public function castingFilm() {

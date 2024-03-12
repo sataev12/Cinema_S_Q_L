@@ -16,7 +16,7 @@
             foreach($acteurs as $acteur) { ?>
                 <tr>
                     <td><?= $acteur["Prenom"] ?></td>
-                    <td><?= $acteur["Nom"] ?></td>
+                    <td><?= $acteur["Nom"] ?>  </td>
                 </tr>
         <?php } ?>
     </tbody>

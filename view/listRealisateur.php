@@ -15,8 +15,7 @@
         <?php
             foreach($Realisateurs as $realisateur) { ?>
                 <tr>
-                    <td><?= $realisateur["Nom"] ?></td>
-                    <td><?= $realisateur["Prenom"] ?></td>
+                    <td><?= $realisateur["NomRealisateur"] ?><a href="index.php?action=realisateurInfo&id=<?= $realisateur["Id_Realisateur"] ?>">Detail d'un realisateur</a></td>
                 </tr>
         <?php } ?>
     </tbody>
