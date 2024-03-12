@@ -14,12 +14,16 @@
         <?php
         ?>    
             <div class="Casting-detail">
+                <ul>
                     <?php
                         foreach($requete->fetchAll() as $id => $genre) { ?>
-                            <h2><a href="index.php?action=detailGenre&id=<?= $genre['idGenre'] ?>"> <?= $genre['libelle']?> </a></h2>
-                            <a href='index.php?action=detailGenre&id=<?= $genre['idGenre'] ?>'>Details d'un acteur</a>           
-                            <h3><?= $genre['idGenre'] ?></h3>
-                <?php   } ?>
+                            <li>
+                                <a href='index.php?action=detailGenre&id=<?= $genre['Id_Genre'] ?>'> <?= $genre['Libelle']?> </a>
+                            </li>
+                            
+                    <?php   } ?>
+                </ul>
+                    
                     
                             
 

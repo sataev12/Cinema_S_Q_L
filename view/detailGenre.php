@@ -1,7 +1,8 @@
 <?php 
     ob_start(); 
-    // $detailGenreOne = $detailGenre->fetch();
-    var_dump('test'); die;
+    // $castingGenre = $detailGenre->fetch();
+    // $acteur = $requeteActeur->fetchAll();
+    // var_dump('test'); die;
 ?>
 
 <table class="uk-table uk-table-striped">
@@ -12,8 +13,11 @@
         <?php
         ?>    
             <div class="Casting-detail">
-                   
-                    <h1>Test</h1>
+                    <?php
+                        foreach($detailGenre->fetchAll() as $Id => $genreDet) { ?>
+                            <h2><?= $genreDet['libelle'] . ' : ' . $genreDet['film'] ?><img src="<?= $genreDet['URLimg'] ?>" alt="film"></h2> 
+                <?php   } ?>
+                    
                             
 
     

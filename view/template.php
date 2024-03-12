@@ -41,7 +41,7 @@
         <li><a href="index.php?action=listActeurs">Acteurs</a></li>
         <li><a href="index.php?action=new">Nouveau</a></li>
         <li><a href="index.php?action=listRealisateur">Realisateur</a></li>
-        <li><a href="index.php?action=castingGenre">Genre</a></li>
+        <li><a href="index.php?action=listGenre">Genre</a></li>
         </ul>
     </section>
 

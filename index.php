@@ -32,7 +32,9 @@ if(isset($_GET["action"])){
         case "acceuil" : $ctrlCinema->acceuil(); break;
         case "acteurCasting": $ctrlCinema->acteurCasting($id); break;
         case "realisateurCasting": $ctrlCinema->realisateurCasting($id); break;
-        case "castingGenre": $ctrlCinema->castingGenre($id); break;
+        case "listGenre": $ctrlCinema->listGenre(); break;
+        case "detailGenre": $ctrlCinema->detailGenre($id); break;
+        
         $ctrlCinema->acceuil();
         // case "detailFilm": $ctrlCinema->detailFilm($id); break;
         // case "listActeurs": $ctrlCinema->listActeurs(); break;
