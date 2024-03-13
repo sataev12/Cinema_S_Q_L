@@ -43,6 +43,8 @@
             <li><a href="index.php?action=listRealisateur">Realisateur</a></li>
             <li><a href="index.php?action=listGenre">Genre</a></li>
             <li><a href="index.php?action=listeRole">Rôles</a></li>
+            <li><a href="index.php?action=ajoutPersonneForm">Ajouter acteur/réalisateur</a></li>
+
         </ul>
     </section>
 

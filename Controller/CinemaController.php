@@ -258,6 +258,8 @@ class CinemaController {
             $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_SPECIAL_CHARS);
             $sexe = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_SPECIAL_CHARS);
             $dateNaissance = filter_input(INPUT_POST, "dateNaissance", FILTER_SANITIZE_SPECIAL_CHARS);
+            $est_acteur = isset($_POST['acteur']) ? 1 : 0;
+            $est_realisateur = isset($_POST['realisateur']) ? 1 : 0;
             // var_dump($dateNaissance);die;
         }if($nom && $prenom && $sexe && $dateNaissance) {
             $pdo = Connect::seConnecter();
@@ -271,6 +273,38 @@ class CinemaController {
             ':sexe' => $sexe,
             ':dateNaissance' => $dateNaissance
             ]);
+
+            // Si la personne est un acteur, l'ajouter à la table Acteur
+            if($est_acteur) {
+                $dernier_personne_id = $pdo->lastInsertId();
+                $requete_acteur = $pdo->prepare("
+                INSERT INTO Acteurs(id_personne)
+                VALUES(:id_personne);
+                ");
+                $requete_acteur->execute([
+                    ':id_personne' => $dernier_personne_id
+                ]);
+                // Une message de succèsse si on arrive bien ajouter un acteur
+                $_SESSION['message'] = "Un acteur a été ajoutée avec succès !";
+                header("Location: index.php?action=ajoutPersonneForm");
+                exit();
+            }
+
+            // Si la personne est un réalisateur, l'ajouter à la table Realisateur
+            if($est_realisateur) {
+                $dernier_personne_id = $pdo->lastInsertId();
+                $requete_realisateur = $pdo->prepare("
+                INSERT INTO Realisateur(id_personne)
+                VALUES(:id_personne);
+                ");
+                $requete_realisateur->execute([
+                    ':id_personne' => $dernier_personne_id
+                ]);
+                // Une message de succèsse si on arrive bien ajouter un réalisateur
+                $_SESSION['message'] = "Un réalisateur a été ajoutée avec succès !";
+                header("Location: index.php?action=ajoutPersonneForm");
+                exit();
+            }
         }
     }
 
