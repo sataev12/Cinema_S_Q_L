@@ -5,7 +5,7 @@
     // $acteur = $requeteActeur->fetchAll();
     // var_dump($castingRole); die;
 ?>
-<h1><?= $role['NomPersonnage'] ?></h1>
+<h1>Le role : <?= $role['NomPersonnage'] ?> a été joué par :</h1>
 <table class="uk-table uk-table-striped">
     <thead>
        
@@ -16,7 +16,7 @@
             <div class="Casting-detail">
                     <?php
                         foreach($castingRole as $roleDet) { ?>
-                            <h2><?= $roleDet['NomActeur'] ?> <?= $roleDet['dansFilm']?></h2> 
+                            <h2><?= $roleDet['NomActeur'] ?> dans un film :  <?= $roleDet['dansFilm']?></h2> 
                 <?php   } ?>
                     
                             
