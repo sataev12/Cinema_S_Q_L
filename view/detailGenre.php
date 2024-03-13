@@ -12,16 +12,21 @@
     <tbody>
         <?php
         ?>    
-            <div class="Casting-detail">
-                    <?php
-                        foreach($detailGenre->fetchAll() as $Id => $genreDet) { ?>
-                            <h2><?= $genreDet['libelle'] . ' : ' . $genreDet['film'] ?><img src="<?= $genreDet['URLimg'] ?>" alt="film"></h2> 
-                <?php   } ?>
+            
+            <?php
+                $films = $detailGenre->fetchAll();
+
+                if (empty($films)) {
+                    echo "<p>Aucun film dans ce genre.</p>";
+                } else {
+                    foreach($films as $Id => $genreDet) {
+                        echo "<h2>{$genreDet['libelle']} : {$genreDet['film']} <img src='{$genreDet['URLimg']}' alt='film'></h2>";
+                    }
+                }
+            ?>
                     
                             
 
-    
-            </div>
                     
        
     </tbody>

@@ -3,6 +3,7 @@
 ?>
 
 <!-- Conteneur principal pour le carrousel -->
+<!-- Conteneur principal pour le carrousel -->
 <div class="container">
         <!-- Élément carrousel -->
         <div class="carousel">
@@ -11,12 +12,21 @@
                 <!-- Première diapositive -->
                 <div class="slide">
                     <!-- Image de la première diapositive -->
-                    <?php $filmImg = $requeteFilm->fetch();?>
-                    <img  src="<?= $filmImg['URLimg'] ?>"
+                    <img src="./public/css/img/870x489_66103671.webp"
                         alt="Image 1">
                 </div>
                 <!-- Deuxième diapositive -->
-                
+                <div class="slide">
+                    <!-- Image de la deuxième diapositive -->
+                    <img src="./public/css/img/filmlegende.jpeg"
+                        alt="Image 2">
+                </div>
+                <!-- Troisième diapositive -->
+                <div class="slide">
+                    <!-- Image de la troisième diapositive -->
+                    <img src="./public/css/img/newsFillm.jpeg"
+                        alt="Image 3">
+                </div>
             </div>
             <!-- Conteneur pour les boutons de navigation -->
             <div class="carousel-controls">

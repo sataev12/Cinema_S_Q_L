@@ -52,7 +52,6 @@
     <div id="wrapper" class="uk-container uk-container-expand">
         <main>
             <div id="contenu">
-                <h2 class="uk-heading-bullet"><?= $titre_secondaire ?></h2>
                 <?= $contenu ?>
             </div>
         </main>
