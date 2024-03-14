@@ -248,30 +248,51 @@ class CinemaController {
         require "view/ajoutPersonneForm.php";
     }
     public function ajoutPersonne() {
-        $nom = '';
-        $prenom = '';
-        $sexe = '';
-        $dateNaissance = '';
         if(isset($_POST['submit'])) {
+
             //Verif
             $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_SPECIAL_CHARS);
             $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_SPECIAL_CHARS);
             $sexe = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_SPECIAL_CHARS);
             $dateNaissance = filter_input(INPUT_POST, "dateNaissance", FILTER_SANITIZE_SPECIAL_CHARS);
+            $photo = filter_input(INPUT_POST, "photo", FILTER_SANITIZE_SPECIAL_CHARS);
             $est_acteur = isset($_POST['acteur']) ? 1 : 0;
             $est_realisateur = isset($_POST['realisateur']) ? 1 : 0;
+            $photoVariable = isset($_FILES['file']);
             // var_dump($dateNaissance);die;
-        }if($nom && $prenom && $sexe && $dateNaissance) {
+            $tmpName = $_FILES['file']['tmp_name'];
+            $name = $_FILES['file']['name'];
+            $size = $_FILES['file']['size'];
+            $error = $_FILES['file']['error'];
+            $type = $_FILES['file']['type'];
+
+            $tabExtention = explode('.', $name);
+            $extention = strtolower(end($tabExtention));
+
+
+            //Tableau des extensions qu'on autorise
+            $extentionsAutorisees = ['jpg', 'jpeg', 'gif', 'png'];
+            $tailleMax = 40000000;
+
+
+        }if($nom && $prenom && $sexe && $dateNaissance && $photoVariable && in_array($extention, $extentionsAutorisees) && $size <= $tailleMax && $error == 0) {
+            
+            $uniqueName = uniqid('', true);
+            $fileName = $uniqueName.'.'.$extention;
+
+            move_uploaded_file($tmpName, './public/css/img/'.$fileName);
+
             $pdo = Connect::seConnecter();
             $requete = $pdo->prepare("
-            INSERT INTO Personne(Nom, Prenom, Sexe, DateNaissance)
-            VALUES(:nom, :prenom, :sexe, :dateNaissance);
+            INSERT INTO Personne(Nom, Prenom, Sexe, DateNaissance, Photo)
+            VALUES(:nom, :prenom, :sexe, :dateNaissance, :photo);
             ");
             $requete->execute([
             ':nom' => $nom,
             ':prenom' => $prenom,
             ':sexe' => $sexe,
-            ':dateNaissance' => $dateNaissance
+            ':dateNaissance' => $dateNaissance,
+            ':photo' => $fileName
             ]);
 
             // Si la personne est un acteur, l'ajouter à la table Acteur
@@ -305,6 +326,7 @@ class CinemaController {
                 header("Location: index.php?action=ajoutPersonneForm");
                 exit();
             }
+            // Ajouter une photo
         }
     }
 

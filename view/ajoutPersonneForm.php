@@ -3,7 +3,7 @@
 ?>
 
 <h1>Ajouter une personne</h1>
-<form action="index.php?action=ajoutPersonne" method="post">
+<form action="index.php?action=ajoutPersonne" method="post" enctype="multipart/form-data">
     <label for="nom">  <!-- Le champ de titre -->
         Ajouter un nom : 
         <input type="text" name="nom" placeholder="Nom">
@@ -19,6 +19,10 @@
     <label for="dateNaissance">  <!-- Le champ de titre -->
         Ajouter un personne : 
         <input type="date" name="dateNaissance" placeholder="Date de naissance">
+    </label>
+    <label for="file">
+        Ajouter une photo
+        <input type="file" name="file">
     </label>
 
     <!-- CHECKBOX ACTEUR/REALISATEUR -->
