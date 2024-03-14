@@ -33,6 +33,12 @@
         <input type="file" name="file">
     </label>
 
+    <!-- La liste deroulante pour les realisateur -->
+    <label for="realisateur">
+        Choisir le réalisateur
+        <select name="realisateur" id="realisateur"></select>
+    </label>
+
 
 
     <input type="submit" name="submit" value="envoyer">
