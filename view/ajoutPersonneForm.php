@@ -51,8 +51,8 @@
 
 <?php
 
-$titre = "Ajouter un rôle";
-$titre_secondaire = "Ajouter un rôle";
+$titre = "Ajouter une personne";
+$titre_secondaire = "Ajouter une personne";
 $contenu = ob_get_clean();
 //Inclure le fichier
 require "view/template.php"; ?>

@@ -1,52 +1,52 @@
-<!-- ?php 
-    ob_start(); 
-    // $film = $requete->fetchAll();
-    // $realistr = $requete->fetchAll(); 
-    //     var_dump($realistr);
-    //     die;
+<?php
+    ob_start();
 ?>
 
 <h1>Ajouter un film</h1>
-<form action="index.php?action=ajoutFilm" method="post">
-    <label for="Titre">  
-        Nom du film : 
-        <input type="text" name="titre" placeholder="Titre">
+<form action="index.php?action=ajoutFilm" method="post" enctype="multipart/form-data">
+    <label for="Titre">
+        Ajouter un titre
+        <input type="text" name="Titre" placeholder="titre">
     </label>
-    <label for="AnneSortFr"> 
-        L'année de film : 
-        <input type="number" name="AnneSortFr" placeholder="année de film">
+    <label for="AnneSortFr">
+        Ajouter une année de sortie
+        <input type="number" name="AnneSortFr" placeholder="année de sortie">
     </label>
-    <label for="Duree"> 
-        La duree du film : 
-        <input type="number" name="Duree" placeholder="Duree">
+    <label for="Duree">
+        Ajouter une durée de film
+        <input type="number" name="Duree" placeholder="La durée">
     </label>
-    <label for="Synopsis"> 
-        La duree du film : 
+    <label for="Synopsis">
+        Ajouter un synopsis
         <input type="text" name="Synopsis" placeholder="Synopsis">
     </label>
-    <label for="Note"> 
-        La duree du film : 
+    <label for="Note">
+        Ajouter une note
         <input type="number" name="Note" placeholder="Note">
     </label>
-    <label for="Affiche">  
-        La duree du film : 
+    <label for="Affiche">
+        Ajouter une affiche
         <input type="text" name="Affiche" placeholder="Affiche">
     </label>
-    <select>
-        ?php 
-        // while ($realistr = $requete->fetch()) { 
-            // echo "<option value='" . $realistr['Nom'] . "'>" . $realistr['Nom'] . "</option>";
-        // }
-        // ?>
-    </select>
-    <input type="submit" value="envoyer">
-    
+    <label for="file">
+        Ajouter une photo
+        <input type="file" name="file">
+    </label>
+
+
+
+    <input type="submit" name="submit" value="envoyer">
 </form>
 
 
 
-// $titre = "Ajouter un film";
-// $titre_secondaire = "Ajouter un film";
-// $contenu = ob_get_clean();
-//Inclure le fichier
-// require "view/template.php"; // -->
+
+
+<?php
+
+$titre = "Ajouter un film";
+$titre_secondaire = "Ajouter un film";
+$contenu = ob_get_clean();
+require "view/template.php";
+
+?>

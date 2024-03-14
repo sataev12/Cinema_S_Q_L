@@ -44,6 +44,7 @@
             <li><a href="index.php?action=listGenre">Genre</a></li>
             <li><a href="index.php?action=listeRole">Rôles</a></li>
             <li><a href="index.php?action=ajoutPersonneForm">Ajouter acteur/réalisateur</a></li>
+            <li><a href="index.php?action=ajoutFilmForm">Ajouter un film</a></li>
 
         </ul>
     </section>
@@ -62,7 +63,7 @@
 
     
 
-
+<!-- --------------------------FOOTER------------------------------ -->
 <footer>
     <h1>SUIVEZ-NOUS</h1>
     <div class="icon-reseauSoc">

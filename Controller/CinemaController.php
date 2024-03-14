@@ -547,6 +547,49 @@ class CinemaController {
         
     }
 
+    public function ajoutFilmForm() {
+
+        require "view/ajoutFilmForm.php";
+    }
+
+    public function ajoutFilm() {
+        if(isset($_POST['submit'])) {
+            // Verification
+            $Titre = filter_input(INPUT_POST, "Titre", FILTER_SANITIZE_SPECIAL_CHARS);
+            $AnneSortFr = filter_input(INPUT_POST, "AnneSortFr", FILTER_VALIDATE_INT);
+            $Duree = filter_input(INPUT_POST, "Duree", FILTER_VALIDATE_INT);
+            $Synopsis = filter_input(INPUT_POST, "Synopsis", FILTER_SANITIZE_SPECIAL_CHARS);
+            $Note = filter_input(INPUT_POST, "Note", FILTER_VALIDATE_INT);
+            $Affiche = filter_input(INPUT_POST, "Affiche", FILTER_SANITIZE_SPECIAL_CHARS);
+            $photo = filter_input(INPUT_POST, "photo", FILTER_SANITIZE_SPECIAL_CHARS);
+            $photoVariable = isset($_FILES['file']);
+            $tmpName = $_FILES['file']['tmp_name'];
+            $name = $_FILES['file']['name'];
+            $size = $_FILES['file']['size'];
+            $error = $_FILES['file']['error'];
+            $type = $_FILES['file']['type'];
+
+            $tabExtention = explode('.', $name);
+            $extention = strtolower(end($tabExtention));
+
+            // Tableau des extention qu'on autorise
+            $extentionsAutorisees = ['jpg', 'jpeg', 'gif', 'png'];
+            $tailleMax = 40000000;
+
+        }if($Titre && $AnneSortFr && $Duree && $Synopsis && $Note && $Affiche && $photoVariable && in_array($extention, $extentionsAutorisees) && $size <= $tailleMax && $error == 0) {
+
+            $uniqueName = uniqid('', true);
+            $fileName = $uniqueName.'.'.$extention;
+
+            move_uploaded_file($tmpName, './public/css/img/'.$fileName);
+
+            $pdo = Connect::seConnecter();
+            $requete = $pdo->prepare("
+            
+            ")
+        }
+    }
+
 
     public function acceuil() {
         $pdo = Connect::seConnecter();
