@@ -12,15 +12,29 @@
         <tr>ANNEE SORTIE</tr>
     </thead>
     <tbody>
+        
         <?php
+            
             foreach($acteurs as $acteur) { ?>
                 <tr>
                     <td><?= $acteur["Prenom"] ?></td>
-                    <td><?= $acteur["Nom"] ?> <a href="index.php?action=acteurFilmographie&id=<?= $acteur['Id_Acteur'] ?>">Detail d'un acteur</a>  </td>
+                    <td><?= $acteur["Nom"] ?> <a href="index.php?action=acteurFilmographie&id=<?= $acteur['Id_Acteur'] ?>">Detail d'un acteur</a> <br> 
+                    <a href="index.php?action=modifierPersonneForm&id=<?= $acteur['Id_Acteur'] ?>">Modifier</a>
+                    </td>
                 </tr>
         <?php } ?>
     </tbody>
 </table>
+
+<?php
+// Vérifier si un message de succès est défini
+if(isset($_SESSION['message'])) {
+    // Afficher le message de succès
+    echo '<div class="success">' . $_SESSION['message'] . '</div>';
+    // Vider la variable de session pour ne pas afficher le message à nouveau lors des prochains chargements de page
+    unset($_SESSION['message']);
+}
+?>
 
 <?php
 

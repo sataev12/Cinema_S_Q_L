@@ -466,6 +466,65 @@ class CinemaController {
         require "view/detailRole.php";
     }
 
+    // Modifier d'une personne
+
+    public function modifierPersonneForm($Id_Acteur) {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+        SELECT Personne.Nom AS Nom, Personne.Prenom AS Prenom, Personne.Sexe AS Sexe, Personne.DateNaissance AS DateNaissance, Id_Acteur, Personne.id_personne
+        FROM `Acteurs`
+        INNER JOIN Personne ON Acteurs.id_personne = Personne.id_personne
+        WHERE Id_Acteur = :Id_Acteur
+        ");
+        $requete->execute([
+            ':Id_Acteur' => $Id_Acteur
+        ]);
+
+        //Pour recuperer les données
+        $resultat = $requete->fetch();
+
+        // Verification si des données ont été trouvées
+        if($resultat) {
+            // Assignation des données récupérées aux variables
+            $nom = $resultat['Nom'];
+            $prenom = $resultat['Prenom'];
+            $sexe = $resultat['Sexe'];
+            $dateNaissance = $resultat['DateNaissance'];
+            $idPersonne = $resultat['id_personne'];
+        }
+
+        //Affichage du formulaire de modification avec les données pre-remplies
+        require "view/modifierPersonneForm.php";
+    }
+
+    public function modifierPersonne($idPersonne) {
+        // Recuperer les données du formulaire
+        $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_SPECIAL_CHARS);
+        $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_SPECIAL_CHARS);
+        $sexe = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_SPECIAL_CHARS);
+        $dateNaissance = filter_input(INPUT_POST, "dateNaissance", FILTER_SANITIZE_SPECIAL_CHARS);
+        // Mettre à jour les données dans la base des données
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+        UPDATE Personne
+        SET Nom = :nom, Prenom = :prenom, Sexe = :sexe, DateNaissance = :dateNaissance
+        WHERE id_personne = :id_personne
+        ");
+        $requete->execute([
+            ':nom' => $nom,
+            ':prenom' => $prenom,
+            ':sexe' => $sexe,
+            ':dateNaissance' => $dateNaissance,
+            ':id_personne' => $idPersonne
+        ]);
+
+
+        
+        $_SESSION['message'] = "La personne a été bien modifiée";
+        header("Location: index.php?action=listActeurs");
+        
+    }
+
 
     public function acceuil() {
         $pdo = Connect::seConnecter();
