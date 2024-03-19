@@ -63,7 +63,7 @@ class CinemaController {
     public function listRealisateur() {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-        SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS NomRealisateur, Realisateur.Id_Realisateur AS Id_Realisateur
+        SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS NomRealisateur, Realisateur.Id_Realisateur AS Id_Realisateur, Realisateur.id_personne AS id_personne
         FROM Realisateur
         INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
         ");
