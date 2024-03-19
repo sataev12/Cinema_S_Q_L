@@ -36,7 +36,14 @@
     <!-- La liste deroulante pour les realisateur -->
     <label for="realisateur">
         Choisir le réalisateur
-        <select name="realisateur" id="realisateur"></select>
+        <select name="Id_Realisateur">
+            <?php foreach($realisateur as $realisateurOne) : ?>
+                <option value="<?= $realisateurOne['Id_Realisateur']; ?>">
+                    <?= $realisateurOne['Nom'] . ' ' . $realisateurOne['Prenom']; ?>
+                </option>
+            <?php endforeach; ?>    
+        </select>
+    
     </label>
 
 
@@ -50,9 +57,8 @@
 
 <?php
 
-$titre = "Ajouter un film";
-$titre_secondaire = "Ajouter un film";
+$titre = "Ajouter une personne";
+$titre_secondaire = "Ajouter une personne";
 $contenu = ob_get_clean();
-require "view/template.php";
-
-?>
+//Inclure le fichier
+require "view/template.php"; ?>

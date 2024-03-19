@@ -44,7 +44,8 @@
             foreach($requete->fetchAll() as $Id => $film) { ?>
                 <tr class="infoFilm" >
                     <td><?= $film["Titre"] ?></td>
-                    <td><img class="imgFilm" src="<?= $film["URLimg"] ?>"></td>
+                    <td><img class="imgFilm" src="./public/css/img/<?= $film["URLimg"] ?>"></td>
+                    
                     <td>.<a href='index.php?action=detailsFilm&id=<?= $film['Id_Film'] ?>'>Details de film</a></td>
                     
                 </tr>

@@ -548,6 +548,19 @@ class CinemaController {
     }
 
     public function ajoutFilmForm() {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+        SELECT Personne.Nom AS Nom, Personne.Prenom AS Prenom, Id_Realisateur
+        FROM Realisateur
+        INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
+        ");
+        $requete->execute();
+
+        
+        $realisateur = $requete->fetchAll();
+        
+
+       
 
         require "view/ajoutFilmForm.php";
     }
@@ -556,6 +569,8 @@ class CinemaController {
         if(isset($_POST['submit'])) {
             // Verification
             $Titre = filter_input(INPUT_POST, "Titre", FILTER_SANITIZE_SPECIAL_CHARS);
+            $realisateur = filter_input(INPUT_POST, "Id_Realisateur", FILTER_SANITIZE_SPECIAL_CHARS);
+            
             $AnneSortFr = filter_input(INPUT_POST, "AnneSortFr", FILTER_VALIDATE_INT);
             $Duree = filter_input(INPUT_POST, "Duree", FILTER_VALIDATE_INT);
             $Synopsis = filter_input(INPUT_POST, "Synopsis", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -585,8 +600,19 @@ class CinemaController {
 
             $pdo = Connect::seConnecter();
             $requete = $pdo->prepare("
-            
-            ")
+            INSERT INTO Film(Titre, AnneSortFr, Duree, Synopsis, Note, Affiche, Id_Realisateur, URLimg)
+            VALUES (:Titre, :AnneSortFr, :Duree, :Synopsis, :Note, :Affiche, :Id_Realisateur, :photo)
+            ");
+            $requete->execute([
+                ':Titre' => $Titre,
+                ':AnneSortFr' => $AnneSortFr,
+                ':Duree' => $Duree,
+                ':Synopsis' => $Synopsis,
+                ':Note' => $Note,
+                ':Affiche' => $Affiche,
+                ':Id_Realisateur' => $realisateur,
+                ':photo' => $fileName
+            ]);
         }
     }
 
