@@ -46,6 +46,13 @@
     
     </label>
 
+    <label for="genres">Genres : </label>
+    <?php
+    // Affichage des cases à cocher pour les genres
+    foreach ($genres as $genre) {
+        echo '<input type="checkbox" name="genres[]" value="' . $genre['Id_Genre'] . '"> ' . $genre['Libelle'] . '<br>';
+    }
+    ?>
 
 
     <input type="submit" name="submit" value="envoyer">

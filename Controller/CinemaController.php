@@ -203,10 +203,10 @@ class CinemaController {
     }
 
     public function ajoutGenre() {
-        $Libelle = '';
         if (isset($_POST['submit'])) {
                     // Verifications des champs de form
                     $Libelle = filter_input(INPUT_POST, "Libelle", FILTER_SANITIZE_SPECIAL_CHARS);
+                    $films = filter_input(INPUT_POST, "Id_Film", FILTER_SANITIZE_SPECIAL_CHARS);
                 }
                 if ($Libelle) {
                     $pdo = Connect::seConnecter();
@@ -218,7 +218,6 @@ class CinemaController {
                         ':Libelle' => $Libelle
                     ]);
                 } 
-        var_dump("hello");
     }
 
     public function ajoutRoleForm() {
@@ -556,8 +555,15 @@ class CinemaController {
         ");
         $requete->execute();
 
-        
         $realisateur = $requete->fetchAll();
+        
+        $requeteGenreFilm = $pdo->prepare("
+        SELECT Id_Genre, Libelle
+        FROM Genre
+        ");
+        $requeteGenreFilm->execute();
+
+        $genres = $requeteGenreFilm->fetchAll();
         
 
        
@@ -570,7 +576,6 @@ class CinemaController {
             // Verification
             $Titre = filter_input(INPUT_POST, "Titre", FILTER_SANITIZE_SPECIAL_CHARS);
             $realisateur = filter_input(INPUT_POST, "Id_Realisateur", FILTER_SANITIZE_SPECIAL_CHARS);
-            
             $AnneSortFr = filter_input(INPUT_POST, "AnneSortFr", FILTER_VALIDATE_INT);
             $Duree = filter_input(INPUT_POST, "Duree", FILTER_VALIDATE_INT);
             $Synopsis = filter_input(INPUT_POST, "Synopsis", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -590,6 +595,10 @@ class CinemaController {
             // Tableau des extention qu'on autorise
             $extentionsAutorisees = ['jpg', 'jpeg', 'gif', 'png'];
             $tailleMax = 40000000;
+
+            // Vérification des genres sélectionnées
+            $genresSelectionnes = isset($_POST['genres']) ? $_POST['genres'] : [];
+            
 
         }if($Titre && $AnneSortFr && $Duree && $Synopsis && $Note && $Affiche && $photoVariable && in_array($extention, $extentionsAutorisees) && $size <= $tailleMax && $error == 0) {
 
@@ -613,7 +622,70 @@ class CinemaController {
                 ':Id_Realisateur' => $realisateur,
                 ':photo' => $fileName
             ]);
+            // Récupération de l'ID du film inséré
+            $idFilm = $pdo->lastInsertId();
+            // Insertion des genres associés au film dans la table genre_film
+            foreach($genresSelectionnes as $idGenre) {
+                $requete_genre_film = $pdo->prepare("
+                    INSERT INTO genre_film(Id_Genre, Id_Film)
+                    VALUES (:Id_Genre, :Id_Film)
+                ");
+                $requete_genre_film->execute([
+                    ':Id_Genre' => $idGenre,
+                    ':Id_Film' => $idFilm
+                ]);
+            }
+
         }
+    }
+
+    public function ajoutCastingForm() {
+        $pdo = Connect::seConnecter();
+        $requeteFilm = $pdo->prepare("
+            SELECT Id_Film, Titre 
+            FROM Film
+        ");
+        $requeteFilm->execute();
+        $titreFilm = $requeteFilm->fetchAll();
+
+        $requeteActeur = $pdo->prepare("
+        SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS Nom, Acteurs.Id_Acteur AS Id_Acteur
+        FROM Acteurs
+        INNER JOIN Personne ON Acteurs.id_personne = Personne.id_personne
+        "); 
+        $requeteActeur->execute();
+        $nomActeurs = $requeteActeur->fetchAll();
+
+        $requeteRole = $pdo->prepare("
+            SELECT id_role, NomPersonnage 
+            FROM Role
+        ");
+        $requeteRole->execute();
+        $requeteRoles = $requeteRole->fetchAll();
+
+        require "view/ajoutCastingForm.php";
+    }
+
+    public function ajoutCasting() {
+        if(isset($_POST['submit'])) {
+            // Verification
+            $acteurId = filter_input(INPUT_POST, "Id_Acteur", FILTER_SANITIZE_SPECIAL_CHARS);
+            $filmId = filter_input(INPUT_POST, "Id_Film", FILTER_SANITIZE_SPECIAL_CHARS);
+            $roleId = filter_input(INPUT_POST, "id_role", FILTER_SANITIZE_SPECIAL_CHARS);
+        }if ($acteurId && $filmId && $roleId) {
+            $pdo = Connect::seConnecter();
+            $requete = $pdo->prepare("
+            INSERT INTO jouer(Id_Film, Id_Acteur, id_role)
+            VALUES(:Id_Film, :Id_Acteur, :id_role)
+            ");
+            $requete->execute([
+                ':Id_Film' => $filmId,
+                ':Id_Acteur' => $acteurId,
+                ':id_role' => $roleId
+            ]);
+        }    
+        
+
     }
 
 
