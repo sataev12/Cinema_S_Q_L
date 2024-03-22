@@ -46,7 +46,10 @@
                     <td><?= $film["Titre"] ?></td>
                     <td><img class="imgFilm" src="./public/css/img/<?= $film["URLimg"] ?>"></td>
                     
-                    <td>.<a href='index.php?action=detailsFilm&id=<?= $film['Id_Film'] ?>'>Details de film</a></td>
+                    <td>.<a href='index.php?action=detailsFilm&id=<?= $film['Id_Film'] ?>'>Details de film</a><br>
+                    <a href="index.php?action=modifierFilmForm&id=<?= $film['Id_Film'] ?>">Modifier</a>
+                    <a href="index.php?action=supprimerFilm&id=<?= $film['Id_Film'] ?>">Supprimer</a>
+                    </td>
                     
                 </tr>
         <?php } ?>

@@ -45,7 +45,6 @@
             <li><a href="index.php?action=listeRole">Rôles</a></li>
             <li><a href="index.php?action=ajoutPersonneForm">Ajouter acteur/réalisateur</a></li>
             <li><a href="index.php?action=ajoutFilmForm">Ajouter un film</a></li>
-            <li><a href="index.php?action=ajoutGenreForm">Ajouter un genre</a></li>
             <li><a href="index.php?action=ajoutCastingForm">Ajouter un casting</a></li>
         </ul>
     </section>

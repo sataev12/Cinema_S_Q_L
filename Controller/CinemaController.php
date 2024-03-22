@@ -149,52 +149,6 @@ class CinemaController {
         require "view/lesPlusLong.php";
     }
 
-    // public function ajoutFilmForm() {
-    //     $pdo = Connect::seConnecter();
-    //     $requete = $pdo->prepare("
-    //     SELECT Personne.Nom, Personne.Prenom
-    //     FROM Realisateur
-    //     INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne;
-    //     ");
-    //     $requete->execute();
-    //     require "view/ajoutFilmForm.php";
-        
-
-    // }
-
-
-    // public function ajoutFilm(){
-    //     // $pdo = Connect::seConnecter();
-    //     // $requete = $pdo->prepare("
-    //     // ");
-    //     if (isset($_POST['submit'])) {
-    //         // Verifications des champs de form
-    //         $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_SPECIAL_CHARS);
-    //         $AnneSortFr = filter_input(INPUT_POST, "AnneSortFr", FILTER_VALIDATE_INT);
-    //         $Duree = filter_input(INPUT_POST, "Duree", FILTER_VALIDATE_INT);
-    //         $Synopsis = filter_input(INPUT_POST, "Synopsis", FILTER_SANITIZE_SPECIAL_CHARS);
-    //         $Note = filter_input(INPUT_POST, "Note", FILTER_VALIDATE_INT);
-    //         $Affiche = filter_input(INPUT_POST, "Affiche", FILTER_SANITIZE_SPECIAL_CHARS);
-    //     }
-    //     if ($titre && $AnneSortFr & $Duree & $Synopsis & $Note & $Affiche) {
-    //         $pdo = Connect::seConnecter();
-    //         $requete = $pdo->prepare("
-    //         INSERT INTO Film(Titre, AnneSortFr, Duree, Synopsis, Note, Affiche)
-    //         VALUES ('Max', '2010', '110', 'un film de test', '3', 'Affiche de mont film de test')
-    //         ");
-    //     $requete->execute([
-    //         'titre' => $titre,
-    //         'AnneSortFr' => $AnneSortFr,
-    //         'Duree' => $Duree,
-    //         'Synopsis' => $Synopsis,
-    //         'Note' => $Note,
-    //         'Affiche' => $Affiche
-    //     ]);
-    //     } 
-    //     var_dump("hello");
-    //     die();
-    // }
-
     public function ajoutGenreForm() {
         
         require "view/ajoutGenreForm.php";
@@ -240,6 +194,9 @@ class CinemaController {
                 ':nom' => $nom
             ]);
         }
+
+        header("Location: index.php?action=listeRole");
+        
     }
 
     public function ajoutPersonneForm() {
@@ -258,7 +215,6 @@ class CinemaController {
             $est_acteur = isset($_POST['acteur']) ? 1 : 0;
             $est_realisateur = isset($_POST['realisateur']) ? 1 : 0;
             $photoVariable = isset($_FILES['file']);
-            // var_dump($dateNaissance);die;
             $tmpName = $_FILES['file']['tmp_name'];
             $name = $_FILES['file']['name'];
             $size = $_FILES['file']['size'];
@@ -731,7 +687,7 @@ class CinemaController {
         }
 
         //Affichage du formulaire de modification avec les données pre-remplies
-        require "view/modifierPersonneForm.php";
+        require "view/modifierRealisateurForm.php";
     }
 
     public function modifierRealisateur($idPersonne) {
@@ -762,9 +718,210 @@ class CinemaController {
         
     }
 
+
+    public function modifierFilmForm($Id_Film) {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+            SELECT Titre, AnneSortFr, Duree, Synopsis, Note, Affiche, Id_Realisateur
+            FROM Film
+            WHERE Id_Film = :Id_Film
+        ");
+        $requete->execute([
+            ':Id_Film' => $Id_Film
+        ]);
+    
+        // Récupération des détails du film
+        $film = $requete->fetch();
+    
+        // Récupération des genres associés à ce film
+        $requeteGenresFilm = $pdo->prepare("
+            SELECT Id_Genre
+            FROM genre_film
+            WHERE Id_Film = :Id_Film
+        ");
+        $requeteGenresFilm->execute([
+            ':Id_Film' => $Id_Film
+        ]);
+    
+        // Récupération des IDs de genres associés
+        $genresFilm = $requeteGenresFilm->fetchAll();
+    
+        // Récupération de tous les genres disponibles
+        $requeteGenres = $pdo->prepare("
+            SELECT Id_Genre, Libelle
+            FROM Genre
+        ");
+        $requeteGenres->execute();
+    
+        // Récupération des genres disponibles
+        $genresDisponibles = $requeteGenres->fetchAll();
+
+        // Récupérer la liste des réalisateurs
+        $requeteRealisateurs = $pdo->prepare("
+            SELECT Personne.id_personne, Personne.Nom, Personne.Prenom
+            FROM Realisateur
+            INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
+        ");
+        $requeteRealisateurs->execute();
+        $realisateurs = $requeteRealisateurs->fetchAll();
+    
+        // Affichage du formulaire de modification avec les données pré-remplies
+        require "view/modifierFilmForm.php";
+    }
+    
+    public function modifierFilm($Id_Film) {
+        
+        // Récupération des données du formulaire
+        $Titre = filter_input(INPUT_POST, "Titre", FILTER_SANITIZE_SPECIAL_CHARS);
+        $realisateur = filter_input(INPUT_POST, "Id_Realisateur", FILTER_SANITIZE_SPECIAL_CHARS);
+        $AnneSortFr = filter_input(INPUT_POST, "AnneSortFr", FILTER_VALIDATE_INT);
+        $Duree = filter_input(INPUT_POST, "Duree", FILTER_VALIDATE_INT);
+        $Synopsis = filter_input(INPUT_POST, "Synopsis", FILTER_SANITIZE_SPECIAL_CHARS);
+        $Note = filter_input(INPUT_POST, "Note", FILTER_VALIDATE_INT);
+        $Affiche = filter_input(INPUT_POST, "Affiche", FILTER_SANITIZE_SPECIAL_CHARS);
+        $photoVariable = isset($_FILES['file']);
+        
+        $tmpName = $_FILES['file']['tmp_name'];
+        $name = $_FILES['file']['name'];
+        $size = $_FILES['file']['size'];
+        $error = $_FILES['file']['error'];
+        $type = $_FILES['file']['type'];
+        
+        $tabExtention = explode('.', $name);
+        $extention = strtolower(end($tabExtention));
+        
+        
+        // Tableau des extensions autorisées
+        $extentionsAutorisees = ['jpg', 'jpeg', 'gif', 'png'];
+        $tailleMax = 40000000;
+        
+        // Vérification des genres sélectionnés
+        $genresSelectionnes = isset($_POST['genres']) ? $_POST['genres'] : [];
+        
+
+        // Vérification des données du formulaire et des critères de sécurité
+        if($Titre && $AnneSortFr && $Duree && $Synopsis && $Note && $Affiche && $photoVariable && in_array($extention, $extentionsAutorisees) && $size <= $tailleMax && $error == 0) {
+            
+            $uniqueName = uniqid('', true);
+            $fileName = $uniqueName.'.'.$extention;
+    
+            move_uploaded_file($tmpName, './public/css/img/'.$fileName);
+    
+            // Mise à jour des informations du film dans la base de données
+            $pdo = Connect::seConnecter();
+            $requete = $pdo->prepare("
+                UPDATE Film
+                SET Titre = :Titre, AnneSortFr = :AnneSortFr, Duree = :Duree, Synopsis = :Synopsis, Note = :Note, Affiche = :Affiche, Id_Realisateur = :Id_Realisateur, URLimg = :photo
+                WHERE Id_Film = :Id_Film
+            ");
+            $requete->execute([
+                ':Titre' => $Titre,
+                ':AnneSortFr' => $AnneSortFr,
+                ':Duree' => $Duree,
+                ':Synopsis' => $Synopsis,
+                ':Note' => $Note,
+                ':Affiche' => $Affiche,
+                ':Id_Realisateur' => $realisateur,
+                ':photo' => $fileName,
+                ':Id_Film' => $Id_Film
+            ]);
+    
+            // Suppression des anciens genres associés au film dans la table genre_film
+            $requeteSuppressionGenres = $pdo->prepare("
+                DELETE FROM genre_film
+                WHERE Id_Film = :Id_Film
+            ");
+            $requeteSuppressionGenres->execute([
+                ':Id_Film' => $Id_Film
+            ]);
+           
+            // Réinsertion des nouveaux genres sélectionnés dans la table genre_film
+            foreach($genresSelectionnes as $idGenre) {
+                $requeteGenreFilm = $pdo->prepare("
+                    INSERT INTO genre_film(Id_Genre, Id_Film)
+                    VALUES (:Id_Genre, :Id_Film)
+                ");
+                $requeteGenreFilm->execute([
+                    ':Id_Genre' => $idGenre,
+                    ':Id_Film' => $Id_Film
+                ]);
+            }
+
+        }
+    }
+
+    public function supprimerFilm($Id_Film) {
+        $pdo = Connect::seConnecter();
+    
+        // Supprimer les entrées associées dans la table jouer
+        $requeteSupprimerJouer = $pdo->prepare("
+            DELETE FROM jouer
+            WHERE Id_Film = :Id_Film
+        ");
+        $requeteSupprimerJouer->execute([':Id_Film' => $Id_Film]);
+    
+        // Supprimer les entrées associées dans la table genre_film
+        $requeteSupprimerGenreFilm = $pdo->prepare("
+            DELETE FROM genre_film
+            WHERE Id_Film = :Id_Film
+        ");
+        $requeteSupprimerGenreFilm->execute([':Id_Film' => $Id_Film]);
+    
+        // Supprimer le film de la table Film
+        $requeteSupprimerFilm = $pdo->prepare("
+            DELETE FROM Film
+            WHERE Id_Film = :Id_Film
+        ");
+        $requeteSupprimerFilm->execute([':Id_Film' => $Id_Film]);
+    
+        // Redirection vers une page appropriée
+        // Par exemple, retourner à la liste des films
+        header("Location: index.php?action=listFilms");
+    }
+
+    public function supprimerGenre($Id_Genre) {
+        $pdo = Connect::seConnecter();
+        $requeteSupprimeGenr_film = $pdo->prepare("
+            DELETE FROM Genre
+            WHERE Id_Genre = :Id_Genre
+        ");
+        $requeteSupprimeGenr_film->execute([
+            ':Id_Genre' => $Id_Genre
+        ]);
+
+        header("Location: index.php?action=listGenre");
+    }
+
+    public function supprimerRole($Id_Role){
+        
+        $pdo = Connect::seConnecter();
+        $requetSupprimerRoleJoue = $pdo->prepare("
+            DELETE FROM jouer
+            WHERE id_role = :id_role
+        ");
+        $requetSupprimerRoleJoue->execute([
+            ':id_role' => $Id_Role
+        ]);
+
+        $requetSupprimerGenre = $pdo->prepare("
+            DELETE FROM Role
+            WHERE id_role = :id_role
+        ");
+        $requetSupprimerGenre->execute([
+            ':id_role' => $Id_Role
+        ]);
+
+
+        header("Location: index.php?action=listeRole");
+    }
+
+
+    
+    
     
     
 
     
 
 }
+

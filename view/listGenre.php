@@ -19,6 +19,8 @@
                         foreach($requete->fetchAll() as $id => $genre) { ?>
                             <li>
                                 <a href='index.php?action=detailGenre&id=<?= $genre['Id_Genre'] ?>'> <?= $genre['Libelle']?> </a>
+                                <a href='index.php?action=supprimerGenre&id=<?= $genre['Id_Genre'] ?>'>Supprimer</a>
+                                <a href='index.php?action=ajoutGenreForm'>Ajouter un genre</a>
                             </li>
                             
                     <?php   } ?>

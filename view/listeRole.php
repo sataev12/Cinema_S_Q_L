@@ -13,10 +13,13 @@
             foreach($role as $nmPersonnage) { ?>
                 <tr>
                     <td><a href="index.php?action=detailRole&id=<?= $nmPersonnage['id_role'] ?>"> <?= $nmPersonnage["NomPersonnage"] ?> </a></td>
+                    <td><a href="index.php?action=supprimerRole&id=<?= $nmPersonnage['id_role'] ?>">Supprimer</a></td>
                 </tr>
         <?php } ?>
     </tbody>
 </table>
+
+<a href="index.php?action=ajoutRoleForm">Ajouter un rôle</a>
 
 <?php
 

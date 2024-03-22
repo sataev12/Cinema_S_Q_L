@@ -46,6 +46,11 @@ if(isset($_GET["action"])){
         case "ajoutCasting": $ctrlCinema->ajoutCasting(); break;
         case "modifierRealisateurForm": $ctrlCinema->modifierRealisateurForm($id); break;
         case "modifierRealisateur": $ctrlCinema->modifierRealisateur($id); break;
+        case "modifierFilmForm": $ctrlCinema->modifierFilmForm($id); break;
+        case "modifierFilm": $ctrlCinema->modifierFilm($id); break;
+        case "supprimerFilm": $ctrlCinema->supprimerFilm($id); break;
+        case "supprimerGenre": $ctrlCinema->supprimerGenre($id); break;
+        case "supprimerRole": $ctrlCinema->supprimerRole($id); break;
 
         
         $ctrlCinema->acceuil();
