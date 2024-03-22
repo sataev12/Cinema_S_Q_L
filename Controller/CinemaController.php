@@ -758,7 +758,7 @@ class CinemaController {
 
         // Récupérer la liste des réalisateurs
         $requeteRealisateurs = $pdo->prepare("
-            SELECT Personne.id_personne, Personne.Nom, Personne.Prenom
+            SELECT personne.id_personne, Realisateur.Id_Realisateur, Personne.Nom, Personne.Prenom
             FROM Realisateur
             INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
         ");
@@ -848,6 +848,8 @@ class CinemaController {
             }
 
         }
+
+        header("location: index.php?action=listFilms");
     }
 
     public function supprimerFilm($Id_Film) {
@@ -913,6 +915,18 @@ class CinemaController {
 
 
         header("Location: index.php?action=listeRole");
+    }
+
+    public function supprimerActeur($Id_Acteur) {
+        $pdo = Connect::seConnecter();
+        $requetSupActeurJoue = $pdo->prepare("
+            DELETE FROM jouer
+            WHERE Id_Acteur = :Id_Acteur
+        ");
+        $requetSupActeurJoue->execute([
+            ':Id_Acteur' => $Id_Acteur
+        ]);
+        
     }
 
 

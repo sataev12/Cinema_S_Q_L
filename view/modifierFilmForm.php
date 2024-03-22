@@ -23,7 +23,7 @@
     <label for="Id_Realisateur">Réalisateur :</label>
     <select name="Id_Realisateur">
         <?php foreach ($realisateurs as $real) : ?>
-            <option value="<?= $real['id_personne'] ?>" <?= ($real['id_personne'] == $film['Id_Realisateur']) ? 'selected' : '' ?>>
+            <option value="<?= $real['Id_Realisateur'] ?>" <?= ($real['id_personne'] == $film['Id_Realisateur']) ? 'selected' : '' ?>>
                 <?= $real['Nom'] . ' ' . $real['Prenom'] ?>
             </option>
         <?php endforeach; ?>

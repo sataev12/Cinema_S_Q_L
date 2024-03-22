@@ -31,7 +31,8 @@
                                 <p><?= $acteur["act"] ?> dans le rôle de <?= $acteur["nomPersonnage"] ?></p>
                                 
                                 
-                                <a href='index.php?action=acteurCasting&id=<?= $acteur['Id_Acteur'] ?>'>Details d'un acteur</a>
+                                <a href='index.php?action=acteurCasting&id=<?=  $acteur['Id_Acteur'] ?>'>Details d'un acteur</a>
+                                <a href="index.php?action=supprimerActeur&id=<?= $acteur['Id_Acteur'] ?>">Supprimer l'acteur</a>
                                 
                             <?php }
                         ?>
