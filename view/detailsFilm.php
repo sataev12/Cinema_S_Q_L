@@ -1,7 +1,7 @@
 <?php 
     ob_start(); 
     $film = $requete->fetch();
-    // $acteur = $requeteActeur->fetchAll();
+    $acteurs = $requeteActeur->fetchAll(); // Stocker les résultats dans une variable
 ?>
 
 <table class="uk-table uk-table-striped">
@@ -16,24 +16,20 @@
                     <img src="<?= $film["URLimg"] ?>" alt="Photo de film">
                     <div class="detailColonne">
                         <p>Anné de sortie : <?= $film["AnneSortFr"] ?></p>
-                        <p>Les genre du film:</p>
+                        <p>Les genres du film :</p>
                         <?php
                             foreach($requeteGenre->fetchAll() as $Id => $genre) { ?>
                                 <p><?= $genre["genreFilm"] ?></p>
                         <?php } ?>
                         <p>Avis <?= $film["Note"] ?>/5</p>
-                        <p>Realisateur : <a href="index.php?action=realisateurCasting&id=<?= $film['Id_Realisateur'] ?>"> <?= $film["Nom"] . " " . $film["Prenom"] ?> </a></p>
-                        <p>Acteur :</p>
+                        <p>Réalisateur : <a href="index.php?action=realisateurCasting&id=<?= $film['Id_Realisateur'] ?>"> <?= $film["RealisateurNom"] ?> </a> </p>
+                        <p>Acteurs :</p>
+
                         <?php
-                            
-                            foreach($requeteActeur->fetchAll() as $Id => $acteur) { ?>
-                                
+                            foreach($acteurs as $acteur) { ?>
                                 <p><?= $acteur["act"] ?> dans le rôle de <?= $acteur["nomPersonnage"] ?></p>
-                                
-                                
-                                <a href='index.php?action=acteurCasting&id=<?=  $acteur['Id_Acteur'] ?>'>Details d'un acteur</a>
+                                <a href='index.php?action=acteurCasting&id=<?=  $acteur['Id_Acteur'] ?>'>Détails de l'acteur</a>
                                 <a href="index.php?action=supprimerActeur&id=<?= $acteur['Id_Acteur'] ?>">Supprimer l'acteur</a>
-                                
                             <?php }
                         ?>
                         
@@ -46,8 +42,9 @@
 
 <?php
 
-$titre = "Details des films";
-$titre_secondaire = "Details des films";
+$titre = "Détails des films";
+$titre_secondaire = "Détails des films";
 $contenu = ob_get_clean();
 //Inclure le fichier
-require "view/template.php"; ?>
+require "view/template.php"; 
+?>

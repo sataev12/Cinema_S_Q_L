@@ -63,9 +63,9 @@ class CinemaController {
     public function listRealisateur() {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-        SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS NomRealisateur, Realisateur.Id_Realisateur AS Id_Realisateur, Realisateur.id_personne AS id_personne
-        FROM Realisateur
-        INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
+            SELECT *
+            FROM Realisateur
+            INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
         ");
         $requete->execute();
         require "view/listRealisateur.php";
@@ -288,9 +288,10 @@ class CinemaController {
     public function detailsFilm($id) {
             $pdo = Connect::seConnecter();
             $requete = $pdo->prepare("
-                SELECT Titre, AnneSortFr, Duree, Synopsis, Note, Affiche, Personne.Nom, Personne.Prenom, URLimg, Film.Id_Realisateur
+                SELECT Film.Titre, Film.AnneSortFr, Film.Duree, Film.Synopsis, Film.Note, Film.Affiche,
+                    CONCAT(Personne.Nom,  ' ', Personne.Prenom) AS RealisateurNom, Film.URLimg, Realisateur.Id_Realisateur
                 FROM `Film`
-                INNER JOIN Realisateur ON Film.Id_Film = Realisateur.Id_Realisateur
+                INNER JOIN Realisateur ON Film.Id_Realisateur = Realisateur.Id_Realisateur
                 INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
                 WHERE Film.Id_Film = :id;
             ");
@@ -334,12 +335,12 @@ class CinemaController {
             'id' => $id
         ]);
         $filmRoleActeur = $pdo->prepare("
-        SELECT Film.Titre AS filmAct, Role.NomPersonnage AS roleAct, Acteurs.Id_Acteur 
-        FROM `jouer` 
-        INNER JOIN Film ON jouer.Id_Film = Film.Id_Film
-        INNER JOIN Role ON jouer.id_role = Role.id_role
-        INNER JOIN Acteurs ON jouer.Id_Acteur = Acteurs.Id_Acteur
-        WHERE Acteurs.Id_Acteur = :id
+            SELECT Film.Titre AS filmAct, Role.NomPersonnage AS roleAct, Acteurs.Id_Acteur 
+            FROM `jouer` 
+            INNER JOIN Film ON jouer.Id_Film = Film.Id_Film
+            INNER JOIN Role ON jouer.id_role = Role.id_role
+            INNER JOIN Acteurs ON jouer.Id_Acteur = Acteurs.Id_Acteur
+            WHERE Acteurs.Id_Acteur = :id
         ");
         $filmRoleActeur->execute([
             ':id' => $id
@@ -350,11 +351,11 @@ class CinemaController {
     public function realisateurCasting($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-        SELECT Film.Titre AS FilmRealstr, CONCAT(Personne.Nom, ' ', Personne.Prenom) AS initRealstr, Personne.Sexe AS sexe, Personne.DateNaissance AS dtNaissance
-        FROM `Realisateur`
-        INNER JOIN Film ON Realisateur.Id_Realisateur = Film.Id_Realisateur
-        INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
-        WHERE Realisateur.Id_Realisateur = :id;
+            SELECT Film.Titre AS FilmRealstr, CONCAT(Personne.Nom, ' ', Personne.Prenom) AS initRealstr, Personne.Sexe AS sexe, Personne.DateNaissance AS dtNaissance
+            FROM `Realisateur`
+            INNER JOIN Film ON Realisateur.Id_Realisateur = Film.Id_Realisateur
+            INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
+            WHERE Realisateur.Id_Realisateur = :id;
         ");
         $requete->execute([
             ':id' => $id
