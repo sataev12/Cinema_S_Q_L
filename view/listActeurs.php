@@ -20,6 +20,7 @@
                     <td><?= $acteur["Prenom"] ?></td>
                     <td><?= $acteur["Nom"] ?> <a href="index.php?action=acteurFilmographie&id=<?= $acteur['Id_Acteur'] ?>">Detail d'un acteur</a> <br> 
                     <a href="index.php?action=modifierPersonneForm&id=<?= $acteur['Id_Acteur'] ?>">Modifier</a>
+                    <a href="index.php?action=supprimerActeurPersonne&id=<?= $acteur['Id_Acteur'] ?>">Supprimer</a>
                     </td>
                 </tr>
         <?php } ?>

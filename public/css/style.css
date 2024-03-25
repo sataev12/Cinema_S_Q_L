@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+Great+Primer:ital@0;1&family=Inspiration&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -11,21 +10,15 @@
     --couleur-secondaire: #2ecc71;
     --couleur-jaune: #E1C04A;
 }
-
-
-
 /* Définir des variables de police de caractères */
 :root {
     --police-principale: 'Arial', sans-serif;
     --police-secondaire: 'Roboto', sans-serif;
 }
-
 a{
   text-decoration: none;
   color: var(--couleur-jaune);
-  
 }
-
 .global{
   height: 100vh;
   display: flex;
@@ -34,22 +27,18 @@ a{
   background: #EBEBEB;
 }
 /* Menu burger */
-
 h2 {
   vertical-align: center;
   text-align: center;
 }
-
 html, body {
   margin: 0;
   height: 100%;
 }
-
 * {
   font-family: "Raleway";
   box-sizing: border-box;
 }
-
 .top-nav {
   display: flex;
   flex-direction: row;
@@ -62,7 +51,6 @@ html, body {
   height: 50px;
   padding: 1em;
 }
-
 .menu {
   display: flex;
   flex-direction: row;
@@ -70,12 +58,10 @@ html, body {
   margin: 0;
   padding: 0;
 }
-
 .menu > li {
   margin: 0 1rem;
   overflow: hidden;
 }
-
 .menu-button-container {
   display: none;
   height: 100%;
@@ -85,11 +71,9 @@ html, body {
   justify-content: center;
   align-items: center;
 }
-
 #menu-toggle {
   display: none;
 }
-
 .menu-button,
 .menu-button::before,
 .menu-button::after {
@@ -101,26 +85,21 @@ html, body {
   transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
   border-radius: 2px;
 }
-
 .menu-button::before {
   content: '';
   margin-top: -8px;
 }
-
 .menu-button::after {
   content: '';
   margin-top: 8px;
 }
-
 #menu-toggle:checked + .menu-button-container .menu-button::before {
   margin-top: 0px;
   transform: rotate(405deg);
 }
-
 #menu-toggle:checked + .menu-button-container .menu-button {
   background: rgba(255, 255, 255, 0);
 }
-
 #menu-toggle:checked + .menu-button-container .menu-button::after {
   margin-top: 0px;
   transform: rotate(-405deg);
@@ -167,7 +146,6 @@ html, body {
     border-bottom: 1px solid #444;
   }
   /*------------------- CARROUSSELLE POUR LA VERSION MOBILE -------------------*/
-
     /* Définition d'un container pour gérer l'affichage */
   .container {
     overflow: hidden;
@@ -271,25 +249,20 @@ html, body {
     /* Border de 10px pour les points inactifs */
     border: 10px solid #ffffff;
   }
-
   /* NAV */
   .recherche{
     display: flex;
     margin-right: -6em;
     font-size: 1.6em;
   };
-
   .flech{
     color: white;
   }
   /*--------------------- List films -------------------------*/
-
-  #contenu{
+#contenu{
     overflow: hidden;
   }
-
   /* decor */
-
   .decor{
     background: var(--couleur-jaune);
     height: 0.8em;
@@ -311,99 +284,71 @@ html, body {
     gap: 3em;
     box-shadow: 3px 5px 4px rgb(110, 106, 106);
   }
-
   .agenda p{
     margin-left: 5em;
   }
-  .fa-plus{
-   
-  }
-
   .tre{
     height: 1.5em;
     width: 0.9em;
     background: var(--couleur-jaune);
     border-radius: 3px;
   }
-
   .parent-decor-block{
     display: flex;
     gap: 6.9em;
     margin-top: 1em;
   }
-
   .paren-decor{
     display: flex;
     gap: 0.4em;
   }
-
   .next-flesh{
     width: 1em;
     border-radius: 20px;
     background: white;
     font-size: 22px;
   }
-
   /* La partie dédie aux top acteurs du jour*/
-
   .sous-titre{
     display: flex;
     align-items: stretch;
     gap: 1em;
   }
-
   .sous-titre p{
     margin-left: 3em;
   }
-
   .btn-nxt{
     display: flex;
     gap: 5px;
   }
-
   /* ----------------------------FOOTER------------------------------ */
-
   .block-footer-one{
     display: flex;
     flex-direction: column;
     align-items: center;
     background: #312C2C;
   }
-
   .block-footer-one p{
     color: white;
   }
 
-
 }
-
-        
-        
-    
-  
-
-
-
-    
 
     /* ---------------------------------------------------------- */
     .uk-table{
         margin: 1em 1em;
     }
-
     .imgFilm{
         border-radius: 10px;
         object-fit: cover;
         width: 5em;
         height: 9em;
     }
-
     .tableAffiche{
         display: flex;
         align-items: flex-start;
         gap: 1em;
     }
-
     .infoFilm{
         display: flex;
         flex-direction: column-reverse;

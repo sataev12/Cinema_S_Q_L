@@ -54,6 +54,7 @@ if(isset($_GET["action"])){
         case "supprimerActeur": $ctrlCinema->supprimerActeur($id); break;
         case "supprimerRoleActeur": $ctrlCinema->supprimerRoleActeur($id); break;
         case "supprimerFilmAct": $ctrlCinema->supprimerFilmAct($id); break;
+        case "supprimerActeur": $ctrlCinema->supprimerActeur($id); break;
         
         
         $ctrlCinema->acceuil();
