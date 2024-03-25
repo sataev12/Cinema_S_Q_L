@@ -40,7 +40,23 @@
         </div>
     </div>
     <div class="global">
-        <div class="decor"></div>    
+        <div class="decor"></div>
+        <h1>Cinema</h1>
+        <div class="agenda">
+            <p>Agenda des sorties</p>
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="parent-decor-block">
+            <div class="paren-decor">
+                <div class="tre"></div>
+                <p>Toujours à l'affiche</p>
+            </div>    
+            <div class="paren-decor">
+                <div class="next-flesh"><i class="fa-solid fa-arrow-left flech"></i></div>
+                <div class="next-flesh"><i class="fa-solid fa-arrow-right flech"></i></div>
+            </div>    
+        </div>
+        
 
         <table class="uk-table uk-table-striped">
             
@@ -54,7 +70,15 @@
                         </tr>
                 <?php } ?>
             </tbody>
+
+            
         </table>
+        <div class="decor"></div>
+        <h1>Stars</h1>
+        <div class="sout-titre">
+            <p>Top Stars du jour sur TopFilms</p>
+        </div>
+        
     </div>
     
     <?php
