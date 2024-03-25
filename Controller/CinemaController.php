@@ -696,6 +696,8 @@ class CinemaController {
         SELECT *
         FROM Film
         ");
+        // $films = $requete->fetchAll();
+
         $requete->execute();
         $requeteFilm = $pdo->prepare("
         SELECT URLimg

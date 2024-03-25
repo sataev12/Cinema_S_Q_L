@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+.global{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 /* Définir des variables de couleur */
 :root {
     --couleur-nav: #000000;
@@ -15,6 +21,12 @@
 :root {
     --police-principale: 'Arial', sans-serif;
     --police-secondaire: 'Roboto', sans-serif;
+}
+
+a{
+  text-decoration: none;
+  color: var(--couleur-jaune);
+  
 }
 /* Menu burger */
 
@@ -39,7 +51,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
   background-color: #00BAF0;
-  background: linear-gradient(to left, #f46b45, #eea849);
+  background: black;
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #FFF;
   height: 50px;
@@ -132,7 +144,7 @@ html, body {
     transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
   #menu-toggle:checked ~ .menu li {
-    border: 1px solid #333;
+    border: 1px solid #fff7f7;
     height: 2.5em;
     padding: 0.5em;
     transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
@@ -143,8 +155,8 @@ html, body {
     margin: 0;
     padding: 0.5em 0;
     width: 100%;
-    color: white;
-    background-color: #222;
+    color: rgb(255, 255, 255);
+    background-color: #ffffff;
   }
   .menu > li:not(:last-child) {
     border-bottom: 1px solid #444;
@@ -209,10 +221,13 @@ html, body {
     /* Espacement égal entre les boutons */
   }
   /* Style des boutons de contrôle */
-  .carousel-controls button {
+  .carousel-controls .btn-next {
     padding: 10px;
     /* Ajout de padding pour un meilleur contrôle */
-    background-color: aquamarine;
+    background-color: rgb(0, 0, 0);
+    border-radius: 20px;
+    color: #fff;
+    font-size: 1em;
     /* Arrière-plan en aquamarine */
   }
   /* Définition des points de contrôle */
@@ -244,12 +259,45 @@ html, body {
   /* Styles pour les points de navigation du carrousel */
   .carousel-dots .active {
     /* Border de 10px pour le point actif */
-    border: 10px solid var(--couleur-jaune) !important;
+    border: 10px solid black !important;
     /* !important permet de surcharger les autres styles éventuels */
   }
   .carousel-dots .inactive {
     /* Border de 10px pour les points inactifs */
     border: 10px solid #ffffff;
+  }
+
+  /* NAV */
+  .recherche{
+    display: flex;
+    margin-right: -6em;
+    font-size: 1.6em;
+  };
+
+  .flech{
+    color: white;
+  }
+
+ 
+
+
+
+
+  /* List films */
+
+  #contenu{
+    overflow: hidden;
+  }
+
+  /* decor */
+
+  .decor{
+    
+    background: var(--couleur-jaune);
+    height: 0.8em;
+    width: 9em;
+    border-radius: 9px;
+    margin-top: 1em;
   }
 
 
@@ -263,13 +311,7 @@ html, body {
 
 
 
-    /* ------------------------------------RECHERCHE--------------------------------- */
-
-    .fa-magnifying-glass {
-        font-size: 2em;
-        color: white;
-
-    }
+    
 
     /* ---------------------------------------------------------- */
     .uk-table{

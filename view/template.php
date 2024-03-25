@@ -31,7 +31,8 @@
                     </g>
                 </svg>
             </div>
-        </a>    
+        </a>
+        <i class="fa-solid fa-magnifying-glass recherche"></i>    
         <input id="menu-toggle" type="checkbox" />
         <label class='menu-button-container' for="menu-toggle">
         <div class='menu-button'></div>
