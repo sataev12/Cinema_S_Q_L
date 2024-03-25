@@ -1,6 +1,6 @@
 <?php 
     ob_start(); 
-    $realisateurFilm = $requete->fetch();
+    
     // $acteur = $requeteActeur->fetchAll();
     // var_dump($realisateurFilm); die;
 ?>
@@ -12,10 +12,10 @@
         <?php
         ?>    
             <div class="Realisateur-detail">
-                <h1><?= $realisateurFilm["FilmRealstr"] ?></h1>
-                <p>Nom et prenom de realisateur : <?= $realisateurFilm["initRealstr"] ?></p>
-                <p>Sexe : <?= $realisateurFilm["sexe"] ?></p>
-                <p>La date de naissance <?= $realisateurFilm["dtNaissance"] ?></p>
+                <h1><?= $requeteInfoRealisateurs['Nom'] ?></h1>
+                <p>Nom et prenom de realisateur : <?= $requeteInfoRealisateurs["Nom"] ?></p>
+                <p>Sexe : <?= $requeteInfoRealisateurs["sexe"] ?></p>
+                <p>La date de naissance <?= $requeteInfoRealisateurs["DateNaissance"] ?></p>
                 <p>Realisateur des films suivants :</p>   
                 <?php
                         foreach($tousFilmRealstr->fetchAll() as $Id => $castingRealisateur) { ?>
@@ -28,6 +28,16 @@
        
     </tbody>
 </table>
+
+<?php
+    // Vérifier si un message de succès est défini
+    if (isset($_SESSION['message'])) {
+        // AFFICHER UN MESSAGE DE SUCCES
+        echo '<div class="success">' . $_SESSION['message'] . '</div>';
+        // Vider la variable pour ne pas l'afficher lors de la prochain chargement de page
+        unset($_SESSION['message']);
+    }
+    ?>
 
 <?php
 

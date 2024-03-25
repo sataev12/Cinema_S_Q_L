@@ -46,18 +46,59 @@ class CinemaController {
             ':id' => $id
         ]);
         $requeteFilmographie = $pdo->prepare("
-        SELECT Film.Titre AS titre
-        FROM jouer
-        INNER JOIN Acteurs ON jouer.Id_Acteur = Acteurs.Id_Acteur
-        INNER JOIN Personne ON Acteurs.id_personne = Personne.id_personne
-        INNER JOIN Film ON jouer.Id_Film = Film.Id_Film
-        WHERE Acteurs.Id_Acteur = :id;
+            SELECT Film.Titre AS titre, Film.Id_Film
+            FROM jouer
+            INNER JOIN Acteurs ON jouer.Id_Acteur = Acteurs.Id_Acteur
+            INNER JOIN Personne ON Acteurs.id_personne = Personne.id_personne
+            INNER JOIN Film ON jouer.Id_Film = Film.Id_Film
+            WHERE Acteurs.Id_Acteur = :id;
         ");
         $requeteFilmographie->execute([
             ':id' => $id
         ]);
+        $requeteRole = $pdo->prepare("
+            SELECT Role.NomPersonnage, CONCAT(Personne.Nom, ' ', Personne.Prenom) AS Nom, Film.Titre, Role.id_role    
+            FROM jouer
+            INNER JOIN Acteurs ON jouer.Id_Acteur = Acteurs.Id_Acteur
+            INNER JOIN Personne ON Acteurs.id_personne = Personne.id_personne
+            INNER JOIN Role ON jouer.id_role = Role.id_role
+            INNER JOIN Film ON jouer.Id_Film = Film.Id_Film
+            WHERE Acteurs.Id_Acteur = :id
+        ");
+        $requeteRole->execute([
+            ':id' => $id
+        ]);
+        
 
         require "view/acteurFilmographie.php";
+    }
+
+    public function supprimerRoleActeur($id_role) {
+        $pdo = Connect::seConnecter();
+        $supprimerRoleActeur = $pdo->prepare("
+        DELETE FROM jouer
+        WHERE id_role = :id_role
+        ");
+        $supprimerRoleActeur->execute([
+            ':id_role' => $id_role
+        ]);
+
+
+        $_SESSION['message'] = "Un casting d'un acteur a été supprimer avec succès !";
+        header('Location: index.php?action=listActeurs');
+    }
+
+    public function supprimerFilmAct($Id_Film){
+        $pdo = Connect::seConnecter();
+        $supprimerFilmAct = $pdo->prepare("
+            DELETE FROM jouer
+            WHERE Id_Film = :Id_Film
+        ");
+        $supprimerFilmAct->execute([
+            ':Id_Film' => $Id_Film
+        ]);
+
+        header("Location: index.php?action=listActeurs");
     }
 
     public function listRealisateur() {
@@ -350,16 +391,19 @@ class CinemaController {
 
     public function realisateurCasting($id) {
         $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("
-            SELECT Film.Titre AS FilmRealstr, CONCAT(Personne.Nom, ' ', Personne.Prenom) AS initRealstr, Personne.Sexe AS sexe, Personne.DateNaissance AS dtNaissance
-            FROM `Realisateur`
-            INNER JOIN Film ON Realisateur.Id_Realisateur = Film.Id_Realisateur
+        $requeteInfoRealisateur = $pdo->prepare("
+            SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS Nom, Personne.Sexe AS sexe, Personne.DateNaissance AS DateNaissance
+            FROM Realisateur
             INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
-            WHERE Realisateur.Id_Realisateur = :id;
+            WHERE Realisateur.Id_Realisateur = :id
         ");
-        $requete->execute([
+        $requeteInfoRealisateur->execute([
             ':id' => $id
         ]);
+        $requeteInfoRealisateurs = $requeteInfoRealisateur->fetch();
+        
+
+        // -------------------------------------------Filmographie-------------------------------------
 
         $tousFilmRealstr = $pdo->prepare("
         SELECT Film.Titre AS filmRealistr
@@ -642,7 +686,7 @@ class CinemaController {
             ]);
         }    
         
-
+        header("Location: index.php?action=ajoutCastingForm");
     }
 
 
@@ -929,14 +973,6 @@ class CinemaController {
         ]);
         
     }
-
-
-    
-    
-    
-    
-
-    
 
 }
 

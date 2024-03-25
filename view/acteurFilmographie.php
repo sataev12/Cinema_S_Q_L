@@ -5,12 +5,8 @@
     $filmAct = $requeteFilmographie->fetchAll();
     // $acteur = $requeteActeur->fetchAll();
     // var_dump($castingRole); die;
+    $requeteRoles = $requeteRole->fetchAll();
 ?>
-<h1>Filmographie d'un acteur : </h1>
-<?php
-    foreach($filmAct as $filmActInfo) { ?>
-        <h2><?= $filmActInfo['titre'] ?></h2> 
-<?php   } ?>
 
 
 <table class="uk-table uk-table-striped">
@@ -20,11 +16,15 @@
     <tbody>
         <h1>Acteur : </h1>   
             <div class="Casting-detail">
-                    <?php
+                <?php
                         foreach($acteursInfo as $acteurInfo) { ?>
                             <h2><?= $acteurInfo['NomActeur'] ?> <br> Sexe: <?= $acteurInfo['sexe']?> <br> Date de naissance :  <?= $acteurInfo['DateNaissance']?></h2> 
                 <?php   } ?>
-                    
+                <?php
+                        foreach($requeteRoles as $requeteRole) { ?>
+                            <h2>joué le role <?= $requeteRole['NomPersonnage'] ?> dans un film <?= $requeteRole['Titre'] ?></h2>
+                            <a href="index.php?action=supprimerRoleActeur&id=<?= $requeteRole['id_role'] ?>">Supprimer le role</a>
+                <?php   } ?>  
                             
 
     
