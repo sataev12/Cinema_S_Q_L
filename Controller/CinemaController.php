@@ -705,6 +705,15 @@ class CinemaController {
         WHERE id_film = 1
         ");
         $requeteFilm->execute();
+
+        $requeteTopActeur = $pdo->prepare("
+            SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS Nom, Personne.Photo
+            FROM Acteurs
+            INNER JOIN Personne ON Acteurs.id_personne = Personne.id_personne
+        ");
+        $requeteTopActeur->execute();
+        $requeteTopActeurs = $requeteTopActeur->fetchAll();
+
         require "view/acceuil.php";
     }
 

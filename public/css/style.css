@@ -344,6 +344,36 @@ html, body {
     font-size: 22px;
   }
 
+  /* La partie dédie aux top acteurs du jour*/
+
+  .sous-titre{
+    display: flex;
+    align-items: stretch;
+    gap: 1em;
+  }
+
+  .sous-titre p{
+    margin-left: 3em;
+  }
+
+  .btn-nxt{
+    display: flex;
+    gap: 5px;
+  }
+
+  /* ----------------------------FOOTER------------------------------ */
+
+  .block-footer-one{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #312C2C;
+  }
+
+  .block-footer-one p{
+    color: white;
+  }
+
 
 }
 

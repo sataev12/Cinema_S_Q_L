@@ -75,9 +75,29 @@
         </table>
         <div class="decor"></div>
         <h1>Stars</h1>
-        <div class="sout-titre">
+        <div class="sous-titre">
             <p>Top Stars du jour sur TopFilms</p>
+            <div class="btn-nxt">
+                <div class="next-flesh"><i class="fa-solid fa-arrow-left flech"></i></div>
+                <div class="next-flesh"><i class="fa-solid fa-arrow-right flech"></i></div>
+            </div>
         </div>
+        <table class="uk-table uk-table-striped">
+            
+            <tbody class="tableAffiche" >
+                
+            <?php foreach($requeteTopActeurs as $acteur) { ?>
+    <?php if (!empty($acteur['Photo'])) { ?>
+        <tr class="infoFilm">
+            <td><?= $acteur['Nom'] ?></td>
+            <td><img class="imgFilm" src="./public/css/img/<?= $acteur["Photo"] ?>"></td>        
+        </tr>
+    <?php } ?>
+<?php } ?>
+            </tbody>
+
+            
+        </table>
         
     </div>
     
