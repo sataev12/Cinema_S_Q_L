@@ -52,27 +52,27 @@
                 <p>Toujours à l'affiche</p>
             </div>    
             <div class="paren-decor">
-                <div class="next-flesh"><i class="fa-solid fa-arrow-left flech"></i></div>
-                <div class="next-flesh"><i class="fa-solid fa-arrow-right flech"></i></div>
+                <div class="next-flesh nxt-droit "><i class="fa-solid fa-arrow-left flech"></i></div>
+                <div class="next-flesh nxt-gauche "><i class="fa-solid fa-arrow-right flech"></i></div>
             </div>    
         </div>
         
 
-        <table class="uk-table uk-table-striped">
+        <div class="uk-table uk-table-striped" id="film-slider">
             
-            <tbody class="tableAffiche" >
+            <div class="tableAffiche filmSlide" >
                 
                 <?php
                     foreach($requete->fetchAll() as $Id => $film) { ?>
-                        <tr class="infoFilm" >
-                            <td><a href='index.php?action=detailsFilm&id=<?= $film['Id_Film'] ?>'><?= $film['Titre'] ?></a></td>
-                            <td><img class="imgFilm" src="./public/css/img/<?= $film["URLimg"] ?>"></td>        
-                        </tr>
+                        <div class="infoFilm" >
+                            <div><a href='index.php?action=detailsFilm&id=<?= $film['Id_Film'] ?>'><?= $film['Titre'] ?></a></div>
+                            <div><img class="imgFilm" src="./public/css/img/<?= $film["URLimg"] ?>"></div>        
+                    </div>
                 <?php } ?>
-            </tbody>
+            </div>
 
             
-        </table>
+        </div>
         <div class="decor"></div>
         <h1>Stars</h1>
         <div class="sous-titre">
@@ -82,22 +82,22 @@
                 <div class="next-flesh left"><i class="fa-solid fa-arrow-right flech"></i></div>
             </div>
         </div>
-        <table class="uk-table uk-table-striped">
-            <tbody class="tableAffiche">
+        <div class="uk-table uk-table-striped" id="film-slider">
+            <div class="tableAffiche tablActeur">
                 <?php foreach($requeteTopActeurs as $acteur) { ?>
                     <?php if (!empty($acteur['Photo'])) { ?>
-                        <tr class="infoFilm">
-                            <td><?= $acteur['Nom'] ?></td>
-                            <td><img class="imgFilm" src="./public/css/img/<?= $acteur["Photo"] ?>"></td>        
-                        </tr>
+                        <div class="infoFilm">
+                            <div><?= $acteur['Nom'] ?></div>
+                            <div><img class="imgFilm" src="./public/css/img/<?= $acteur["Photo"] ?>"></div>        
+                        </div>
                     <?php } ?>
                 <?php } ?>
-            </tbody>
-        </table>
-            </tbody>
+                    </div>
+            </div>
+                    </div>
 
             
-        </table>
+                    </div>
         
     </div>
     

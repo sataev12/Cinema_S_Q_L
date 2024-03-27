@@ -82,23 +82,88 @@
 
 // Carrousselle de acteurs
 
-document.addEventListener('DOMContentLoaded', function() {
-    var rightButton = document.querySelector('.right');
-    var leftButton = document.querySelector('.left');
-    var tableAffiche = document.querySelector('.tableAffiche');
-    console.log(tableAffiche);
 
-    rightButton.addEventListener('click', function() {
-        tableAffiche.scrollBy({
-            left: 200,
-            behavior: 'smooth'
-        });
-    });
 
-    leftButton.addEventListener('click', function() {
-        tableAffiche.scrollBy({
-            left: -200,
-            behavior: 'smooth'
-        });
-    });
+sliderContainer = document.querySelector("#film-slider")
+sliderChil = sliderContainer.querySelector(".filmSlide")
+btnNext = document.querySelector(".nxt-droit");
+btnGauche = document.querySelector('.nxt-gauche')
+
+let currentLeft = 0; // La position actuelle à -87px
+
+btnNext.addEventListener('click', function() {
+    const scrollAmount = 10; // Montant de défilement en pixels
+    const newValScroll = currentLeft - scrollAmount;
+    if (newValScroll >= -156) {
+        currentLeft = newValScroll; // Incrémente la position actuelle
+        sliderChil.style.left = currentLeft + 'px';
+    }
 });
+btnGauche.addEventListener('click', function() {
+    const scrollAmount = 10;
+    const newValScroll = currentLeft + scrollAmount;
+    if (newValScroll <= 10) {
+        currentLeft = newValScroll;
+        sliderChil.style.left = currentLeft + 'px';
+    }
+
+})
+
+
+
+// Carrousselle pour la liste des acteurs --------------------------------------------------------------
+
+btnActeurRight = document.querySelector('.right');
+btnActeurLeft = document.querySelector('.left');
+
+slideBlock = document.querySelector('.tablActeur');
+
+
+let currentLeftActeur = 9; 
+
+btnActeurRight.addEventListener('click', function() {
+    const scrollAmount = 35; // Montant de défilement en pixels
+    const newLeft = currentLeftActeur - scrollAmount; // Calculer la nouvelle position
+    if (newLeft >= -131) { // Vérifier si la nouvelle position est inférieure à -131px
+        currentLeftActeur = newLeft; // Mettre à jour la position actuelle
+        slideBlock.style.left = currentLeftActeur + 'px'; // Appliquer la nouvelle position
+    }
+});
+
+btnActeurLeft.addEventListener('click', function() {
+    const scrollAmount = 35; // Montant de défilement en pixels
+    const newLeft = currentLeftActeur + scrollAmount; // Calculer la nouvelle position
+    if (newLeft <= 9) { // Vérifier si la nouvelle position est supérieure à 9px
+        currentLeftActeur = newLeft; // Mettre à jour la position actuelle
+        slideBlock.style.left = currentLeftActeur + 'px'; // Appliquer la nouvelle position
+    }
+});
+
+// parseInt(currentLeftActeur) <= 9 || parseInt(currentLeft) <= 131
+
+btnActeurRight.addEventListener('click', function() {
+    const scrollAmount = 35; // Montant de défilement en pixels
+    const newLeft = currentLeftActeur - scrollAmount; // Calculer la nouvelle position
+    if (newLeft >= -131) { // Vérifier si la nouvelle position est inférieure à -131px
+        currentLeftActeur = newLeft; // Mettre à jour la position actuelle
+        slideBlock.style.left = currentLeftActeur + 'px'; // Appliquer la nouvelle position
+    }
+});
+
+btnActeurLeft.addEventListener('click', function() {
+    const scrollAmount = 35; // Montant de défilement en pixels
+    const newLeft = currentLeftActeur + scrollAmount; // Calculer la nouvelle position
+    if (newLeft <= 9) { // Vérifier si la nouvelle position est supérieure à 9px
+        currentLeftActeur = newLeft; // Mettre à jour la position actuelle
+        slideBlock.style.left = currentLeftActeur + 'px'; // Appliquer la nouvelle position
+    }
+});
+
+
+
+
+
+
+
+
+
