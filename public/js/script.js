@@ -111,7 +111,7 @@ btnGauche.addEventListener('click', function() {
 
 
 
-// Carrousselle pour la liste des acteurs --------------------------------------------------------------
+//-------------------------------- Carrousselle pour la liste des acteurs ----------------------------------
 
 btnActeurRight = document.querySelector('.right');
 btnActeurLeft = document.querySelector('.left');
@@ -139,7 +139,7 @@ btnActeurLeft.addEventListener('click', function() {
     }
 });
 
-// parseInt(currentLeftActeur) <= 9 || parseInt(currentLeft) <= 131
+// ---------------------------------------Pour les acteurs-----------------------------------------------
 
 btnActeurRight.addEventListener('click', function() {
     const scrollAmount = 35; // Montant de défilement en pixels
