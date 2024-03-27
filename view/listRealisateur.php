@@ -16,7 +16,6 @@
                     <td><?= $Realisateur["Prenom"] ?></td>
                     <td><?= $Realisateur["Nom"] ?> <a href="index.php?action=realisateurCasting&id=<?= $Realisateur['Id_Realisateur'] ?>">Detail d'un realisateur <?php var_dump($Realisateur['Id_Realisateur']) ?> </a> <br> 
                     <a href="index.php?action=modifierPersonneForm&id=<?= $Realisateur['Id_Realisateur'] ?>">Modifier</a>
-                    
                     </td>
                 </tr>
         <?php } ?>

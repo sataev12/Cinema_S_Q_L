@@ -988,8 +988,15 @@ class CinemaController {
     public function supprimerActeurPersonne($Id_Acteur){
         $pdo = Connect::seConnecter();
         $supprimeActPersonne = $pdo->prepare("
-            DELETE FROM Acteur
-        ")
+            DELETE FROM Acteurs
+            WHERE Id_Acteur = :Id_Acteur
+        ");
+        $supprimeActPersonne->execute([
+            ':Id_Acteur' => $Id_Acteur
+        ]);
+
+        $_SESSION['message'] = "Acteur a bien été supprimer";
+        header('Location: index.php?action=listActeurs');
     }
 
 }

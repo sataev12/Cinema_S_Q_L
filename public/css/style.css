@@ -274,7 +274,7 @@ html, body {
     font-family: IM FELL Great Primer;
   }
   .agenda{
-    height: 2em;
+    height: 6em;
     width: 19em;
     background-color: #9b909040;
     border-radius: 3px;
@@ -316,6 +316,7 @@ html, body {
   }
   .sous-titre p{
     margin-left: 3em;
+    color: #999999e9;
   }
   .btn-nxt{
     display: flex;
@@ -331,6 +332,8 @@ html, body {
   .block-footer-one p{
     color: white;
   }
+
+  
 
 }
 

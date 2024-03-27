@@ -79,3 +79,26 @@
         });
     })
 })()
+
+// Carrousselle de acteurs
+
+document.addEventListener('DOMContentLoaded', function() {
+    var rightButton = document.querySelector('.right');
+    var leftButton = document.querySelector('.left');
+    var tableAffiche = document.querySelector('.tableAffiche');
+    console.log(tableAffiche);
+
+    rightButton.addEventListener('click', function() {
+        tableAffiche.scrollBy({
+            left: 200,
+            behavior: 'smooth'
+        });
+    });
+
+    leftButton.addEventListener('click', function() {
+        tableAffiche.scrollBy({
+            left: -200,
+            behavior: 'smooth'
+        });
+    });
+});
