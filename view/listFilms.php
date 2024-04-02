@@ -2,59 +2,64 @@
     ob_start(); 
 ?>
 
-<!-- Conteneur principal pour le carrousel -->
-<div class="container">
-        <!-- Élément carrousel -->
-        <div class="carousel">
-            <!-- Conteneur interne pour les diapositives -->
-            <div class="carousel-inner">
-                <!-- Première diapositive -->
-                <div class="slide">
-                    <!-- Image de la première diapositive -->
-                    <?php $filmImg = $requeteFilm->fetch();?>
-                    <img  src="<?= $filmImg['URLimg'] ?>"
-                        alt="Image 1">
-                </div>
-                <!-- Deuxième diapositive -->
-                
-            </div>
-            <!-- Conteneur pour les boutons de navigation -->
-            <div class="carousel-controls">
-                <!-- Bouton pour passer à la diapositive précédente -->
-                <button id="prev">Précédent</button>
-                <!-- Bouton pour passer à la diapositive suivante -->
-                <button id="next">Suivant</button>
-            </div>
-            <!-- Conteneur pour les points de navigation -->
-            <div class="carousel-dots"></div>
+
+
+
+
+<div class="global">
+        <div class="decor"></div>
+        <h1>Cinema</h1>
+        <div class="agenda">
+            <p>Agenda des sorties</p>
+            <i class="fa-solid fa-plus"></i>
         </div>
-    </div>
-
-<p class="uk-label uk-label-warning">Il y a <?= $requete->rowCount() ?>films</p>
-<a href="index.php?action=detailsFilm">Voir les détails</a>
-
-<table class="uk-table uk-table-striped">
-    <thead>
-        <tr>TITRE</tr>
-        <tr>Film</tr>
-    </thead>
-    <tbody class="tableAffiche" >
+        <div class="parent-decor-block">
+            <div class="paren-decor">
+                <div class="tre"></div>
+                <p>Toujours à l'affiche</p>
+            </div>    
+            <div class="paren-decor">
+                <div class="next-flesh nxt-droit "><i class="fa-solid fa-arrow-left flech"></i></div>
+                <div class="next-flesh nxt-gauche "><i class="fa-solid fa-arrow-right flech"></i></div>
+            </div>    
+        </div>
         
-        <?php
-            foreach($requete->fetchAll() as $Id => $film) { ?>
-                <tr class="infoFilm" >
-                    <td><?= $film["Titre"] ?></td>
-                    <td><img class="imgFilm" src="./public/css/img/<?= $film["URLimg"] ?>"></td>
-                    
-                    <td>.<a href='index.php?action=detailsFilm&id=<?= $film['Id_Film'] ?>'>Details de film</a><br>
-                    <a href="index.php?action=modifierFilmForm&id=<?= $film['Id_Film'] ?>">Modifier</a>
-                    <a href="index.php?action=supprimerFilm&id=<?= $film['Id_Film'] ?>">Supprimer</a>
-                    </td>
-                    
-                </tr>
-        <?php } ?>
-    </tbody>
-</table>
+
+        <div class="uk-table uk-table-striped" id="film-slider">
+            
+            <div class="tableAffiche filmSlide" >
+                
+                <?php
+                    foreach($requete->fetchAll() as $Id => $film) { ?>
+                        <div class="infoFilm" >
+                            <div><a href='index.php?action=detailsFilm&id=<?= $film['Id_Film'] ?>'><?= $film['Titre'] ?></a></div>
+                            <div><img class="imgFilm" src="./public/css/img/<?= $film["URLimg"] ?>"></div>
+                            <td><a href='index.php?action=detailsFilm&id=<?= $film['Id_Film'] ?>'>Details de film</a><br>
+                            <a href="index.php?action=modifierFilmForm&id=<?= $film['Id_Film'] ?>">Modifier</a>
+                            <a href="index.php?action=supprimerFilm&id=<?= $film['Id_Film'] ?>">Supprimer</a>        
+                    </div>
+                <?php } ?>
+            </div>
+        </div>    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <?php
 

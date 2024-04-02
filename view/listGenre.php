@@ -6,7 +6,7 @@
     // var_dump('test'); die;
 ?>
 
-<table class="uk-table uk-table-striped">
+<table class="uk-table uk-table-striped list-role">
     <thead>
        
     </thead>

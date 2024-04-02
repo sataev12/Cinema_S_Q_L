@@ -4,7 +4,7 @@
 ?>
 
 
-<table class="uk-table uk-table-striped">
+<table class="uk-table uk-table-striped list-role">
     <thead>
         <tr>Nome de personnage</tr>
     </thead>

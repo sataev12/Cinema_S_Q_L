@@ -3,7 +3,7 @@
 ?>
 
 <h1>Ajouter une personne</h1>
-<form action="index.php?action=ajoutPersonne" method="post" enctype="multipart/form-data">
+<form class="ajout-personne" action="index.php?action=ajoutPersonne" method="post" enctype="multipart/form-data">
     <label for="nom">  <!-- Le champ de titre -->
         Ajouter un nom : 
         <input type="text" name="nom" placeholder="Nom">

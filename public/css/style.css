@@ -15,10 +15,27 @@
     --police-principale: 'Arial', sans-serif;
     --police-secondaire: 'Roboto', sans-serif;
 }
+form{
+  height: 100vh;
+}
+
+
+/* Cacher le block que j'ai pas besoin pour la version mobile */
+
+.container-block {
+  display: none; /* Par défaut, cachez l'élément */
+}
+.recherche-desktop{
+  display: none;
+}
+.container-desktop{
+  display: none;
+}
 
 
 @media (max-width: 700px) {
 
+  
   a{
     text-decoration: none;
     color: var(--couleur-jaune);
@@ -262,7 +279,7 @@
     color: white;
   }
   /*--------------------- List films -------------------------*/
-#contenu{
+  #contenu{
     overflow: hidden;
   }
   /* decor */
@@ -368,14 +385,165 @@
     color: white;
   }
 
+  /* Formulaire d'ajout d'un film*/
+
+  .form-film{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  /* Les film sur la page listeFilms */
+
+  .list-film{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ajout-personne{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .list-role{
+    height: 100vh;
+  }
+
 }
 
 
     /* ----------------------------- VERSION DESKTOP ----------------------------- */
+@media screen and (min-width: 768px){
+  /* NavBar */
+  .top-nav {
+    height: 6em;
+    width: 100%;
+    background: #000000;
+  }
 
-.top-nav {
-      
+  .menu{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 2.6em;
+  }
+
+  .menu > li > a{
+    color: white;
+    text-decoration: none;
+  }
+
+  #menu-toggle{
+    display: none;
+  }
+
+  .fa-magnifying-glass{
+    display: none;
+  }
+
+  .logo-nav{
+    margin-top: 0.5em;
+    margin-left: 11em;
+
+  }
+
+  .container-block {
+    display: block; /* Affichez l'élément sur les écrans de bureau */
+    width: 20em;
+    height: 2em;
+    border-radius: 4px;
+    background-color: white;
+  }
+
+  .lien-logo{
+      display: flex;
+      align-items: flex-end;
+      gap: 3em;
+  }
+
+  .recherche-desktop{
+    color: #000000;
+  }
+
+  /* SECTION ACCEUIL */
+
+  #contenu{
+    background-color: #b9b6b633;
+  }
+
+  .container{
+    display: none;
+  }
+  .global{
+    display: none;
+  }
+
+  .container-desktop{
+      display: block;
+      display: flex;
+      justify-content: center;
+      background: #9e9b9b40;
+  }
+
+  .container-parent{
+    width: 49em;
+    height: 32em;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .decor-jaune{
+    height: 1em;
+    width: 10em;
+    border-radius: 3px;
+    background-color: var(--couleur-jaune);
+    margin-top: 1em;
+  }
+  .menu-block{
+    display: flex;
+    height: 1.5em;
+    width: 46em;
+    border-radius: 9px;
+    background: #9e9b9b40;
+    justify-content: space-around;
+    box-shadow: 6px 3px 6px rgb(20, 42, 38);
+  }
+  /* Block affiche-dynamique */
+
+  .tre-affiche{
+    background: var(--couleur-jaune);
+    height: 1em;
+    width: 1em;
+  }
+
+  .cinema{
+    display: flex;
+    width: 21em;
+    height: 6em;
+    background: steelblue;
+  }
+  .affiche-dynamique{
+    display: flex;
+  }
+  .acteur-affiche{
+    display: flex;
+  }
+
+  .global{
+    
+  }
+  
+  
+
 }
+
 
 
     

@@ -3,7 +3,7 @@
 ?>
 
 <h1>Ajouter un film</h1>
-<form action="index.php?action=ajoutFilm" method="post" enctype="multipart/form-data">
+<form  class="form-film" action="index.php?action=ajoutFilm" method="post" enctype="multipart/form-data">
     <label for="Titre">
         Ajouter un titre
         <input type="text" name="Titre" placeholder="titre">

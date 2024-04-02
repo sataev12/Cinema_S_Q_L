@@ -6,20 +6,22 @@
 
 
 
-   
-    <tbody>
+   <div class="list-role">
+        <tbody>
         
-    <?php
-            // var_dump( $Realisateurs = $requete->fetch());die;
-            foreach($Realisateurs as $Realisateur) { ?>
-                <tr>
-                    <td><?= $Realisateur["Prenom"] ?></td>
-                    <td><?= $Realisateur["Nom"] ?> <a href="index.php?action=realisateurCasting&id=<?= $Realisateur['Id_Realisateur'] ?>">Detail d'un realisateur <?php var_dump($Realisateur['Id_Realisateur']) ?> </a> <br> 
-                    <a href="index.php?action=modifierPersonneForm&id=<?= $Realisateur['Id_Realisateur'] ?>">Modifier</a>
-                    </td>
-                </tr>
-        <?php } ?>
-    </tbody>
+            <?php
+                // var_dump( $Realisateurs = $requete->fetch());die;
+                foreach($Realisateurs as $Realisateur) { ?>
+                    <tr>
+                        <td><?= $Realisateur["Prenom"] ?></td>
+                        <td><?= $Realisateur["Nom"] ?> <a href="index.php?action=realisateurCasting&id=<?= $Realisateur['Id_Realisateur'] ?>">Detail d'un realisateur <?php var_dump($Realisateur['Id_Realisateur']) ?> </a> <br> 
+                        <a href="index.php?action=modifierPersonneForm&id=<?= $Realisateur['Id_Realisateur'] ?>">Modifier</a>
+                        </td>
+                    </tr>
+            <?php } ?>
+        </tbody>
+   </div>
+    
 
 <?php
 // Vérifier si un message de succès est défini

@@ -15,10 +15,10 @@
 <body>
 
     <section class="top-nav">
-        <a href="index.php?action=acceuil">  
+        <a href="index.php?action=acceuil" class="lien-logo">  
             <div class="logo">
                 <!-- code SVG ici -->
-                <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="24" height="23" viewBox="0 0 24 23" fill="none" class="logo-nav" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_15_23" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="23">
                         <path d="M24 0H0V23H24V0Z" fill="white"/>
                     </mask>
@@ -30,6 +30,9 @@
                         <path d="M13.8457 19.4872C13.7195 19.4872 13.5938 19.4713 13.4718 19.44L8.55835 18.1782C8.39452 17.3398 7.97006 16.5683 7.34067 15.9652C6.71127 15.3621 5.90632 14.9552 5.03143 14.7983L3.71492 10.0899C3.64965 9.85504 3.64984 9.60788 3.71548 9.37313C3.78112 9.13837 3.90991 8.92424 4.08896 8.75212L9.13211 3.91898C9.3115 3.74705 9.53495 3.62342 9.78001 3.56049C10.0251 3.49757 10.2831 3.49758 10.5282 3.56052L15.3039 4.78687C15.4933 5.62012 15.9409 6.37911 16.5881 6.96443C17.2353 7.54975 18.0519 7.93411 18.9308 8.06715L20.2848 12.9109C20.35 13.1458 20.3499 13.393 20.2842 13.6277C20.2185 13.8625 20.0898 14.0766 19.9106 14.2488L14.8675 19.0818C14.7337 19.2107 14.5743 19.313 14.3989 19.3825C14.2236 19.4521 14.0356 19.4877 13.8457 19.4872Z" fill="#4F80E1"/>
                     </g>
                 </svg>
+            </div>
+            <div class="container-block">
+            <i class="fa-solid fa-magnifying-glass recherche-desktop"></i>
             </div>
         </a>
         <i class="fa-solid fa-magnifying-glass recherche"></i>    
@@ -126,10 +129,13 @@
                 </svg>
         </div> <p>|TopFilm</p>
     </div>
+
+    
     
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="public/js/script.js"></script>
+
+<script src="public/js/listFilm.js"></script>
 </body>
 </html>

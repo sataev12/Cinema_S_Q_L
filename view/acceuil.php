@@ -100,6 +100,41 @@
                     </div>
         
     </div>
+
+    <!-- Pour la version mobile  -->
+    <div class="container-desktop">
+        <div class="container-parent">
+            <div class="decor-jaune"></div>
+            <h3>Cinéma</h3>
+            <div class="menu-block">
+                <p>Agenda des sorties</p>
+                <p>Kids</p>
+                <p>Méuilleurs films</p>
+                <p>Méuilleurs documentaires</p>
+            </div>
+            <div class="affiche-dynamique">
+                <div class="cinema">
+                    <div class="tre-affiche"></div>
+                    <p>Toujours à l'affiche</p>
+                    <div class="list-film-One">
+                        <?php
+                            foreach($requete->fetchAll() as $Id => $film) { ?>
+                                <div class="infoFilm" >
+                                    <div><a href='index.php?action=detailsFilm&id=<?= $film['Id_Film'] ?>'><?= $film['Titre'] ?></a></div>
+                                    <div><img class="imgFilm" src="./public/css/img/<?= $film["URLimg"] ?>"></div>        
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="acteur-affiche">
+                    <div class="tre-affiche"></div>
+                    <p>Stars</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     
     <?php
 
