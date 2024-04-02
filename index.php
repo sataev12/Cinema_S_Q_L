@@ -10,6 +10,8 @@ spl_autoload_register(function ($class_name){
 $ctrlCinema = new CinemaController();
 $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 
+$id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+
 if(isset($_GET["action"])){
     switch ($_GET["action"]) {
         case "listFilms": $ctrlCinema->listFilms(); break;

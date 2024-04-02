@@ -943,7 +943,7 @@ class CinemaController {
 
     public function supprimerFilm($Id_Film) {
         $pdo = Connect::seConnecter();
-    
+                                                                                                
         // Supprimer les entrées associées dans la table jouer
         $requeteSupprimerJouer = $pdo->prepare("
             DELETE FROM jouer
