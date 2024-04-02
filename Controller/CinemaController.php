@@ -330,7 +330,7 @@ class CinemaController {
             $pdo = Connect::seConnecter();
             $requete = $pdo->prepare("
                 SELECT Film.Titre, Film.AnneSortFr, Film.Duree, Film.Synopsis, Film.Note, Film.Affiche,
-                    CONCAT(Personne.Nom,  ' ', Personne.Prenom) AS RealisateurNom, Film.URLimg, Realisateur.Id_Realisateur
+                    CONCAT(Personne.Nom,  ' ', Personne.Prenom) AS RealisateurNom, Film.URLimg, Realisateur.Id_Realisateur, Film.Id_Film AS Id_Film
                 FROM `Film`
                 INNER JOIN Realisateur ON Film.Id_Realisateur = Realisateur.Id_Realisateur
                 INNER JOIN Personne ON Realisateur.id_personne = Personne.id_personne
@@ -666,13 +666,46 @@ class CinemaController {
 
         require "view/ajoutCastingForm.php";
     }
+    // Ajout CastingFilm avec un ID de film
+
+    public function ajoutCastingFilmForm($id) {
+        $pdo = Connect::seConnecter();
+        $requeteFilm = $pdo->prepare("
+            SELECT Id_Film, Titre 
+            FROM Film
+            WHERE Id_Film = :id
+        ");
+        $requeteFilm->execute([
+            ':id' => $id
+        ]);
+        $titreFilm = $requeteFilm->fetchAll();
+
+        $requeteActeur = $pdo->prepare("
+        SELECT CONCAT(Personne.Nom, ' ', Personne.Prenom) AS Nom, Acteurs.Id_Acteur AS Id_Acteur
+        FROM Acteurs
+        INNER JOIN Personne ON Acteurs.id_personne = Personne.id_personne
+        "); 
+        $requeteActeur->execute();
+        $nomActeurs = $requeteActeur->fetchAll();
+
+        $requeteRole = $pdo->prepare("
+            SELECT id_role, NomPersonnage 
+            FROM Role
+        ");
+        $requeteRole->execute();
+        $requeteRoles = $requeteRole->fetchAll();
+
+        require "view/ajoutCastingForm.php";
+    }
+
+
 
     public function ajoutCasting() {
         if(isset($_POST['submit'])) {
             // Verification
-            $acteurId = filter_input(INPUT_POST, "Id_Acteur", FILTER_SANITIZE_SPECIAL_CHARS);
-            $filmId = filter_input(INPUT_POST, "Id_Film", FILTER_SANITIZE_SPECIAL_CHARS);
-            $roleId = filter_input(INPUT_POST, "id_role", FILTER_SANITIZE_SPECIAL_CHARS);
+            $acteurId = filter_var($_POST["Id_Acteur"], FILTER_VALIDATE_INT);
+            $filmId = filter_var($_POST["Id_Film"], FILTER_VALIDATE_INT);
+            $roleId = filter_var($_POST["id_role"], FILTER_VALIDATE_INT);
         }if ($acteurId && $filmId && $roleId) {
             $pdo = Connect::seConnecter();
             $requete = $pdo->prepare("

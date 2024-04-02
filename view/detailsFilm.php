@@ -24,6 +24,7 @@
                         <p>Avis <?= $film["Note"] ?>/5</p>
                         <p>Réalisateur : <a href="index.php?action=realisateurCasting&id=<?= $film['Id_Realisateur'] ?>"> <?= $film["RealisateurNom"] ?> </a> </p>
                         <p>Acteurs :</p>
+                        <a href="index.php?action=ajoutCastingFilmForm&id=<?= $film['Id_Film'] ?>">Ajouter casting</a>
 
                         <?php
                             foreach($acteurs as $acteur) { ?>

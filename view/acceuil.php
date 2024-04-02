@@ -67,7 +67,7 @@
                         <div class="infoFilm" >
                             <div><a href='index.php?action=detailsFilm&id=<?= $film['Id_Film'] ?>'><?= $film['Titre'] ?></a></div>
                             <div><img class="imgFilm" src="./public/css/img/<?= $film["URLimg"] ?>"></div>        
-                    </div>
+                        </div>
                 <?php } ?>
             </div>
 
@@ -122,7 +122,7 @@
                                 <div class="infoFilm" >
                                     <div><a href='index.php?action=detailsFilm&id=<?= $film['Id_Film'] ?>'><?= $film['Titre'] ?></a></div>
                                     <div><img class="imgFilm" src="./public/css/img/<?= $film["URLimg"] ?>"></div>        
-                            </div>
+                                </div>
                         <?php } ?>
                     </div>
                 </div>
